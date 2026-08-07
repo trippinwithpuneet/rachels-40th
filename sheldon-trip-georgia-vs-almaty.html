@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheldon's 40th Birthday Trip — Georgia vs Almaty</title>
+<meta name="description" content="A pet-travel & trip dossier comparing Georgia and Almaty (Kazakhstan) for Rachel's 40th, travelling with Sheldon the toy poodle from Bangalore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Karla:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ---------- shared tokens ---------- */
+  :root{
+    --shadow:0 1px 0 rgba(0,0,0,.04),0 10px 30px -20px rgba(0,0,0,.5);
+    /* default = Georgia theme; overridden by body[data-country] */
+    --paper:#F1EBDF;--paper-2:#FBF7EF;--card:#FEFCF7;
+    --ink:#2A211B;--ink-soft:#6B5D4F;--ink-faint:#9C8E7E;
+    --p1:#7A2E2E;--p1-deep:#571F1F;--p2:#265252;--p2-deep:#173636;
+    --gold:#B0862F;--line:#E1D7C7;--line-soft:#ECE4D6;--accent:#7A2E2E;
+    --font-display:"Cormorant Garamond",Georgia,serif;
+    --font-body:"Karla",system-ui,sans-serif;
+  }
+  body[data-country="almaty"]{
+    --paper:#EAEEEE;--paper-2:#F5F8F8;--card:#FCFEFE;
+    --ink:#16202A;--ink-soft:#4E5C68;--ink-faint:#8A97A1;
+    --p1:#1F7E8A;--p1-deep:#124E57;--p2:#1E2740;--p2-deep:#151C30;
+    --gold:#BB8A2C;--line:#D6DDDD;--line-soft:#E5EAEA;--accent:#B23A2E;
+    --font-display:"Space Grotesk",system-ui,sans-serif;
+    --font-body:"Work Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-body);line-height:1.55;font-size:16px;transition:background .25s;
+    background-image:radial-gradient(circle at 88% -4%,rgba(0,0,0,.04),transparent 42%);}
+  .wrap{max-width:980px;margin:0 auto;padding:20px 20px 90px}
+  h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;margin:0}
+  body[data-country="almaty"] h1,body[data-country="almaty"] h2,body[data-country="almaty"] h3{letter-spacing:-.01em}
+  a{color:var(--p1)}
+
+  /* ---------- sticky country switcher ---------- */
+  .switch{position:sticky;top:0;z-index:20;display:flex;gap:8px;justify-content:center;padding:14px 0 12px;margin-bottom:6px;
+    background:linear-gradient(var(--paper),var(--paper) 70%,transparent)}
+  .switch button{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;padding:9px 20px;border-radius:24px;border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;font-weight:600;transition:.15s}
+  .switch button[aria-selected="true"]{background:var(--p1);color:#fff;border-color:var(--p1)}
+  .switch button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+  .country{display:none}
+  .country.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+  /* ---------- masthead ---------- */
+  .masthead{border:1.5px solid var(--ink);background:var(--paper-2);border-radius:4px;padding:24px 26px;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft)}
+  .masthead h1{font-size:clamp(36px,7.5vw,64px);margin:2px 0 0;color:var(--p1-deep)}
+  .masthead .geo{font-size:19px;color:var(--p2);margin:-2px 0 6px;font-style:italic}
+  body[data-country="almaty"] .masthead .geo{font-style:normal;font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em}
+  .masthead .sub{font-size:15px;color:var(--ink-soft);max-width:610px}
+  .hero-img{width:100%;height:230px;object-fit:cover;border-radius:6px;margin-top:16px;border:1px solid var(--line);background:var(--line-soft)}
+  .stamp{position:absolute;top:20px;right:20px;transform:rotate(-7deg);border:2.5px solid var(--p1);color:var(--p1);border-radius:8px;padding:6px 12px;text-align:center;font-family:"IBM Plex Mono",monospace;line-height:1.05;opacity:.9}
+  body[data-country="almaty"] .stamp{transform:rotate(6deg)}
+  .stamp b{display:block;font-size:14px;letter-spacing:.1em}.stamp span{font-size:9px;letter-spacing:.14em}
+  @media(max-width:620px){.stamp{position:static;transform:none;display:inline-block;margin-top:14px}}
+
+  section{margin-top:36px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:8px}
+  .sec-num{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--gold);font-weight:600;letter-spacing:.1em}
+  .sec-head h2{font-size:clamp(22px,4vw,30px);color:var(--p1-deep)}
+  .lead{color:var(--ink-soft);font-size:15px;margin:0 0 6px}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:0 0 16px;box-shadow:var(--shadow);overflow:hidden}
+  .card .pad{padding:0 18px}
+  .card img{width:100%;height:170px;object-fit:cover;display:block;border-bottom:1px solid var(--line);background:var(--line-soft)}
+  .card h3{font-size:20px;margin:12px 0 5px;color:var(--p2-deep)}
+  body[data-country="almaty"] .card h3{font-size:18px}
+  .card p,.card li{font-size:14px;color:var(--ink-soft)}.card ul{margin:6px 0 0;padding-left:18px}.card li{margin-bottom:5px}
+  .k{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+
+  .weather{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  @media(max-width:760px){.weather{grid-template-columns:1fr 1fr}}
+  .wx{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 15px;box-shadow:var(--shadow)}
+  .wx .place{font-family:var(--font-display);font-size:19px;font-weight:600;color:var(--p1-deep)}
+  body[data-country="almaty"] .wx .place{font-size:16px}
+  .wx .temp{font-family:"IBM Plex Mono",monospace;font-size:14px;color:var(--p2);margin:3px 0 4px}.wx .note{font-size:12.5px;color:var(--ink-soft)}
+
+  .pipe{position:relative;margin-left:6px;padding-left:26px}
+  .pipe::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:linear-gradient(var(--p2),var(--gold),var(--accent))}
+  .step{position:relative;margin-bottom:15px}
+  .step::before{content:"";position:absolute;left:-26px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--card);border:2.5px solid var(--p2)}
+  .step h3{font-size:18px;margin:1px 0 3px;color:var(--p2-deep)}.step p{margin:0;font-size:14px;color:var(--ink-soft)}
+  body[data-country="almaty"] .step h3{font-size:16px}
+  .step .tagpill{display:inline-block;margin-top:5px;font-family:"IBM Plex Mono",monospace;font-size:11px;background:rgba(176,134,47,.14);color:var(--gold);border:1px solid rgba(176,134,47,.32);padding:2px 8px;border-radius:20px}
+  .step.home::before{border-color:var(--accent);background:var(--accent)}
+
+  .vids{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:760px){.vids{grid-template-columns:1fr}}
+  .vid{display:block;background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow);text-decoration:none;color:inherit}
+  .vid .thumb{position:relative;height:160px;background:#1a1a1a;overflow:hidden}
+  .vid .thumb img{width:100%;height:100%;object-fit:cover;opacity:.94}
+  .vid .play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .vid .play svg{width:54px;height:54px;filter:drop-shadow(0 2px 6px rgba(0,0,0,.5))}
+  .vid .vt{padding:11px 14px}
+  .vid .vt b{font-family:var(--font-body);font-size:14px;color:var(--ink);display:block;line-height:1.3}
+  .vid .vt span{font-size:11.5px;color:var(--ink-faint);font-family:"IBM Plex Mono",monospace}
+
+  .food{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.food{grid-template-columns:1fr 1fr}}@media(max-width:480px){.food{grid-template-columns:1fr}}
+  .dish{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;box-shadow:var(--shadow)}
+  .dish img{width:100%;height:130px;object-fit:cover;display:block;border-bottom:1px solid var(--line);background:var(--line-soft)}
+  .dish .db{padding:10px 13px}.dish .db b{font-family:var(--font-display);font-size:18px;color:var(--p1-deep);display:block}
+  body[data-country="almaty"] .dish .db b{font-size:15px}
+  .dish .db p{font-size:12.5px;color:var(--ink-soft);margin:2px 0 0}
+
+  .visa{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:700px){.visa{grid-template-columns:1fr}}
+  .vcard{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px 18px;box-shadow:var(--shadow);border-top:4px solid var(--p2)}
+  .vcard.in{border-top-color:var(--accent)}.vcard h3{font-size:20px;color:var(--p2-deep);margin-bottom:3px}
+  body[data-country="almaty"] .vcard h3{font-size:17px}
+  .flag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .vp{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:11px;padding:3px 9px;border-radius:20px;font-weight:600;margin-top:4px;background:rgba(38,82,82,.14);color:var(--p2)}
+  .vp.step{background:rgba(176,134,47,.16);color:var(--gold)}
+  .vcard p{font-size:14px;color:var(--ink-soft);margin-top:8px}
+
+  .tbl-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;min-width:600px;background:var(--card);font-size:13.5px}
+  th,td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line-soft);vertical-align:top}
+  thead th{background:var(--p2);color:#fff;font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;font-weight:600}
+  tbody tr:last-child td{border-bottom:0}
+  td.num{font-family:"IBM Plex Mono",monospace;white-space:nowrap;text-align:right}.trail{font-weight:700;color:var(--ink)}
+  tr.total td{background:rgba(0,0,0,.05);font-weight:700;color:var(--p1-deep)}
+  tr.sub td{background:var(--paper-2);font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-soft)}
+  .pill{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:2px 8px;border-radius:20px;font-weight:600}
+  .pill.easy{background:rgba(38,82,82,.14);color:var(--p2)}.pill.mod{background:rgba(176,134,47,.16);color:var(--gold)}.pill.snow{background:rgba(178,58,46,.13);color:var(--accent)}
+
+  /* itinerary */
+  .itin{display:grid;gap:10px}
+  .day{display:grid;grid-template-columns:64px 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:13px 16px;box-shadow:var(--shadow)}
+  @media(max-width:520px){.day{grid-template-columns:52px 1fr;gap:11px;padding:12px 13px}}
+  .day .dn{font-family:"IBM Plex Mono",monospace;text-align:center}
+  .day .dn b{display:block;font-size:22px;color:var(--p1);line-height:1;font-weight:600}
+  .day .dn span{font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+  .day .dc h3{font-size:17px;color:var(--p2-deep);margin-bottom:2px}
+  body[data-country="almaty"] .day .dc h3{font-size:15px}
+  .day .dc p{font-size:13.5px;color:var(--ink-soft);margin:0}
+  .day .dc .dtag{display:inline-block;margin-top:6px;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;background:rgba(0,0,0,.05);color:var(--ink-soft);padding:2px 8px;border-radius:20px}
+  .day.base .dn b{color:var(--p2)}
+  .note{background:rgba(176,134,47,.10);border:1px solid rgba(176,134,47,.32);border-radius:8px;padding:14px 16px;font-size:13.5px;color:#6d521a;margin-top:14px}.note b{color:var(--gold)}
+  .foot{margin-top:40px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--ink-faint)}.foot b{color:var(--ink-soft)}
+  .credit{font-size:10.5px;color:var(--ink-faint);margin-top:4px;font-family:"IBM Plex Mono",monospace}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body data-country="georgia">
+<div class="wrap">
+
+  <!-- ============ COUNTRY SWITCHER ============ -->
+  <nav class="switch" role="tablist" aria-label="Choose a country">
+    <button role="tab" data-target="georgia" aria-selected="true">🇬🇪 Georgia</button>
+    <button role="tab" data-target="almaty" aria-selected="false">🇰🇿 Almaty</button>
+  </nav>
+
+  <!-- ======================================================= -->
+  <!-- ============          GEORGIA          ================ -->
+  <!-- ======================================================= -->
+  <div class="country active" id="georgia">
+    <header class="masthead">
+      <div class="eyebrow">Pet-travel &amp; trip dossier · Rachel's 40th · 10–12 days, late Nov 2026</div>
+      <h1>Georgia</h1>
+      <div class="geo">საქართველო · Sakartvelo — the Caucasus with Sheldon</div>
+      <div class="sub">A quaint, wine-and-mountains 40th in the country that treats every street dog like family — and one of the few beautiful, cold places you can actually bring Sheldon to from India without the titre-test wait.</div>
+      <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Gergeti_Sameba%2C_Stepantsminda_Georgia.jpg/1280px-Gergeti_Sameba%2C_Stepantsminda_Georgia.jpg" alt="Gergeti Trinity Church below Mount Kazbek" onerror="this.style.display='none'">
+      <div class="stamp"><b>SHELDON&nbsp;OK</b><span>NO TITRE NEEDED</span></div>
+    </header>
+
+    <section><div class="sec-head"><span class="sec-num">01</span><h2>Taking Sheldon — the checkpoints</h2></div>
+      <p class="lead"><b>Georgia does not require a rabies antibody titre test</b> for dogs from at-risk countries like India, and imposes no quarantine when the rules are met — that's what makes it feasible for late November when Italy isn't. The only real timing gate is a valid rabies shot.</p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · India</div><h3>ISO microchip</h3><p>15-digit ISO 11784/11785 chip, implanted <b>before</b> the rabies vaccination. Same number on every document.</p></div>
+        <div class="step"><div class="k">Step 2 · India</div><h3>Rabies vaccination — valid before travel</h3><p>Georgia requires the primary rabies vaccine at least <b>30 days before arrival</b>. For a late-Nov trip, have his rabies shot completed by about <b>23 October 2026</b>.</p><span class="tagpill">the one date that governs everything</span></div>
+        <div class="step"><div class="k">Step 3 · India</div><h3>Parasite treatment</h3><p>Deworming + tick/flea treatment before travel (sensible after the tick-fever); note it on his record.</p></div>
+        <div class="step"><div class="k">Step 4 · India</div><h3>AQCS Bangalore export certificate + NOC</h3><p>Book AQCS ~1 week ahead; present Sheldon ~7 days before departure. Export certificate valid only 10 days. <b>Keep the originals</b> — they let you re-import him without quarantine.</p></div>
+        <div class="step"><div class="k">Step 5 · Tbilisi</div><h3>Arrival in Georgia</h3><p>Entry via Tbilisi airport; National Food Agency may check documents + microchip. No titre, no quarantine when compliant.</p></div>
+        <div class="step home"><div class="k">Step 6 · Return</div><h3>Bringing Sheldon home to India</h3><p>Apply for an <b>Advance NOC from AQCS</b> ≥7 working days before flying back, under the <b>Re-import</b> category (Customs Circular 25/2013), using your original export docs — avoids the 15-day quarantine on fresh imports. Carry a Georgian vet health certificate dated close to departure.</p></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">02</span><h2>Visas — for both of you</h2></div>
+      <div class="visa">
+        <div class="vcard"><div class="flag">Rachel · US passport</div><h3>Visa-free, up to 1 year</h3><span class="vp">No application</span><p>US citizens enter Georgia visa-free for up to 365 days. Arrive with a passport valid 6+ months.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport</div><h3>e-Visa — or visa-free with a US/UK/Schengen visa</h3><span class="vp step">One online step</span><p>Hold a valid <b>US, UK or Schengen visa/residence permit</b> → visa-free. Otherwise the <b>e-Visa at evisa.gov.ge</b> (~$20, ~5 business days, online). No visa-on-arrival.</p></div>
+      </div>
+      <div class="note"><b>New for 2026 — applies to both:</b> Georgia now requires all tourists to carry health &amp; accident insurance of at least 30,000 GEL (~$11,000). Carry proof; you can be refused entry without it.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">03</span><h2>Late-November weather</h2></div>
+      <p class="lead">November is Georgia's quiet, cold, atmospheric shoulder — snow-dusted peaks seen from warm valleys and cosy cellars, <b>not</b> high-alpine trekking. The reward is solitude, low prices, and first-snow drama. ~10 hours of daylight.</p>
+      <div class="weather">
+        <div class="wx"><div class="place">Tbilisi</div><div class="temp">8–12°C day</div><div class="note">Mild, sometimes grey. Old town, baths, wine bars.</div></div>
+        <div class="wx"><div class="place">Kazbegi</div><div class="temp">−5 to +5°C</div><div class="note">Early winter, snowy peaks. Gergeti needs winter shoes.</div></div>
+        <div class="wx"><div class="place">Kakheti</div><div class="temp">6–12°C</div><div class="note">Bare vineyards, cellars busy with the new vintage.</div></div>
+        <div class="wx"><div class="place">West (Kutaisi)</div><div class="temp">8–13°C, wet</div><div class="note">Rainier than the east — check forecasts.</div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">04</span><h2>What to cover — quaint, not commercial</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Tbilisi_aerial_view.jpg/1280px-Tbilisi_aerial_view.jpg" alt="Old Tbilisi" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · 3–4 nights</div><h3>Old Tbilisi</h3><p>Carved wooden balconies under the Narikala fortress; the domed <b>sulphur bathhouses</b> of Abanotubani; natural-wine bars; the Dry Bridge flea market; the Fabrika courtyard. Walkable, dog-tolerant, cheap.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Jvari_Monastery%2C_Mtskheta.jpg/1280px-Jvari_Monastery%2C_Mtskheta.jpg" alt="Jvari Monastery" onerror="this.style.display='none'"><div class="pad"><div class="k">Day trip · 40 min</div><h3>Mtskheta</h3><p>Ancient spiritual capital, UNESCO-listed: hilltop <b>Jvari Monastery</b> above two rivers, and 11th-century Svetitskhoveli cathedral. Quiet, sacred, an easy half-day.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Gergeti_Sameba%2C_Stepantsminda_Georgia.jpg/1280px-Gergeti_Sameba%2C_Stepantsminda_Georgia.jpg" alt="Kazbegi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · the drama</div><h3>Georgian Military Road → Kazbegi</h3><p>Ananuri fortress on its reservoir, the Gudauri viewpoint, then Stepantsminda where the <b>Gergeti Trinity Church</b> stands alone against 5,047 m Mt Kazbek. In snow, the defining image of Georgia.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Sighnaghi%2C_Georgia.jpg/1280px-Sighnaghi%2C_Georgia.jpg" alt="Sighnaghi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · wine + a fairytale town</div><h3>Kakheti &amp; Sighnaghi</h3><p>Walled hilltop "city of love," terracotta roofs, Caucasus views. Family <b>qvevri wineries</b> pour amber wine from buried clay; Bodbe convent among cypresses. Slow food, warm hosts, no crowds.</p></div></div>
+      </div>
+      <div class="note"><b>A calm 10–12 day shape:</b> Tbilisi (3–4) → Mtskheta day trip → Kazbegi (2) → Kakheti/Sighnaghi (2) → Borjomi or Uplistsikhe day → back to Tbilisi (1–2). All low-altitude, driveable, Sheldon-friendly.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">05</span><h2>The 11-day plan, day by day</h2></div>
+      <p class="lead">A slow, quaint loop from Tbilisi — low-altitude, driveable, and Sheldon at your side the whole way. Nudge nights around to taste.</p>
+      <div class="itin">
+        <div class="day base"><div class="dn"><b>1</b><span>Tbilisi</span></div><div class="dc"><h3>Land &amp; settle in the old town</h3><p>Arrive, collect Sheldon, check into an old-town apartment. Gentle evening wander through Abanotubani's lanes; first khinkali and a glass of amber wine.</p><span class="dtag">arrival · easy</span></div></div>
+        <div class="day base"><div class="dn"><b>2</b><span>Tbilisi</span></div><div class="dc"><h3>Old Tbilisi on foot</h3><p>Narikala fortress by cable car, the sulphur baths, the Dry Bridge flea market, Fabrika courtyard. Long lunch, natural-wine bar-hop at dusk.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day base"><div class="dn"><b>3</b><span>Mtskheta</span></div><div class="dc"><h3>Day trip to the old capital</h3><p>Half-day to Jvari Monastery above the two rivers + Svetitskhoveli cathedral. Back to Tbilisi for a supra feast in the evening.</p><span class="dtag">day trip · 40 min</span></div></div>
+        <div class="day"><div class="dn"><b>4</b><span>→ Kazbegi</span></div><div class="dc"><h3>Georgian Military Road north</h3><p>Private driver day: Ananuri fortress, the Gudauri viewpoint, arrive Stepantsminda. Settle into a guesthouse with the Kazbek view.</p><span class="dtag">transfer · scenic</span></div></div>
+        <div class="day"><div class="dn"><b>5</b><span>Kazbegi</span></div><div class="dc"><h3>Gergeti &amp; the mountains</h3><p>Up to the Gergeti Trinity Church (winter footwear) for the postcard view, then the near-level Truso Valley walk — mineral springs and first snow.</p><span class="dtag">nature · snow</span></div></div>
+        <div class="day"><div class="dn"><b>6</b><span>→ Tbilisi</span></div><div class="dc"><h3>Back south, slow afternoon</h3><p>Return drive with photo stops. Easy Tbilisi evening — a cosy dinner, rest Sheldon's legs.</p><span class="dtag">transfer · light</span></div></div>
+        <div class="day"><div class="dn"><b>7</b><span>→ Kakheti</span></div><div class="dc"><h3>Into wine country</h3><p>Self-drive east to Sighnaghi, the walled "city of love." Check into a small guesthouse; sunset over the Alazani valley.</p><span class="dtag">wine · quaint</span></div></div>
+        <div class="day"><div class="dn"><b>8</b><span>Kakheti</span></div><div class="dc"><h3>Qvevri cellars &amp; Bodbe</h3><p>Family wineries pouring amber wine straight from buried clay; the Bodbe convent among cypresses; a long Kakhetian lunch.</p><span class="dtag">food · slow</span></div></div>
+        <div class="day"><div class="dn"><b>9</b><span>→ Tbilisi / Borjomi</span></div><div class="dc"><h3>Forest &amp; springs (your pick)</h3><p>Either a Borjomi day — pine forest trails and mineral springs in the Lesser Caucasus — or an easy return to Tbilisi via the Uplistsikhe cave town.</p><span class="dtag">nature · flexible</span></div></div>
+        <div class="day base"><div class="dn"><b>10</b><span>Tbilisi</span></div><div class="dc"><h3>Birthday day, unhurried</h3><p>Turtle Lake and Mtatsminda for the view, a hammam soak, then Rachel's 40th dinner at a favourite Tbilisi table. Souvenirs at the Dry Bridge.</p><span class="dtag">the 40th 🎂</span></div></div>
+        <div class="day base"><div class="dn"><b>11</b><span>Fly home</span></div><div class="dc"><h3>Depart with Sheldon</h3><p>Final coffee, then to the airport. (Have the AQCS re-import Advance NOC already filed and export docs in hand — see section 01.)</p><span class="dtag">departure</span></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">06</span><h2>Watch before you go</h2></div>
+      <p class="lead">Hand-picked, matched to your trip — mountains, wine villages, and a Tbilisi feel.</p>
+      <div class="vids">
+        <a class="vid" href="https://www.youtube.com/watch?v=x5ciArUDuZE" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/x5ciArUDuZE/hqdefault.jpg" alt="" onerror="this.style.display='none'"><div class="play"><svg viewBox="0 0 68 48"><path fill="#f00" d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z"/><path fill="#fff" d="M27 34l18-10-18-10z"/></svg></div></div><div class="vt"><b>Georgia Travel Guide: Tbilisi, Kazbegi &amp; Kakheti</b><span>YouTube · full-country overview</span></div></a>
+        <a class="vid" href="https://www.youtube.com/watch?v=b9GGbum1UyM" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/b9GGbum1UyM/hqdefault.jpg" alt="" onerror="this.style.display='none'"><div class="play"><svg viewBox="0 0 68 48"><path fill="#f00" d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z"/><path fill="#fff" d="M27 34l18-10-18-10z"/></svg></div></div><div class="vt"><b>Kakheti Wine Day Tour + Sighnaghi</b><span>YouTube · the wine-village mood</span></div></a>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">07</span><h2>Must-try on the table</h2></div>
+      <p class="lead">Vegetarian-friendly and adaptable to gluten-free with care (ask about wheat in breads &amp; sauces).</p>
+      <div class="food">
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Adjaruli_khachapuri.jpg/640px-Adjaruli_khachapuri.jpg" alt="Khachapuri" onerror="this.style.display='none'"><div class="db"><b>Khachapuri</b><p>Cheese bread — the boat-shaped Adjarian with a runny egg &amp; butter.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Khinkali_-_Georgian_dumplings.jpg/640px-Khinkali_-_Georgian_dumplings.jpg" alt="Khinkali" onerror="this.style.display='none'"><div class="db"><b>Khinkali</b><p>Twisted soup dumplings — grip the top-knot, sip, don't stab.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Georgian_wine_in_qvevri.jpg/640px-Georgian_wine_in_qvevri.jpg" alt="Qvevri wine" onerror="this.style.display='none'"><div class="db"><b>Qvevri amber wine</b><p>8,000 years of clay-buried winemaking (UNESCO). Try Saperavi &amp; Rkatsiteli.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Churchkhela_in_Tbilisi.jpg/640px-Churchkhela_in_Tbilisi.jpg" alt="Churchkhela" onerror="this.style.display='none'"><div class="db"><b>Churchkhela</b><p>Walnuts dipped in grape must — the "Georgian Snickers."</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Badrijani_nigvzit.jpg/640px-Badrijani_nigvzit.jpg" alt="Badrijani" onerror="this.style.display='none'"><div class="db"><b>Badrijani nigvzit</b><p>Aubergine rolls with walnut-garlic paste — the veg hero.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Mtsvadi.JPG/640px-Mtsvadi.JPG" alt="Mtsvadi" onerror="this.style.display='none'"><div class="db"><b>Mtsvadi &amp; a supra</b><p>Vine-cutting-grilled skewers at a Georgian feast, with chacha to finish.</p></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">08</span><h2>Nature walks that work in November</h2></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Trail</th><th>Where</th><th>Feel</th><th>Nov status</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Gergeti Trinity walk</td><td>Kazbegi</td><td>Short steep climb to the iconic church &amp; Kazbek view</td><td><span class="pill snow">winter footwear</span></td></tr>
+          <tr><td class="trail">Truso Valley</td><td>near Kazbegi</td><td>Near-level valley — mineral springs, travertine, a fortress</td><td><span class="pill easy">accessible</span></td></tr>
+          <tr><td class="trail">Sighnaghi town walls</td><td>Kakheti</td><td>Ramparts loop over the Alazani valley</td><td><span class="pill easy">easy</span></td></tr>
+          <tr><td class="trail">Mtatsminda &amp; Turtle Lake</td><td>Tbilisi</td><td>City-edge forest, funicular, old-town panoramas</td><td><span class="pill easy">easy</span></td></tr>
+          <tr><td class="trail">Borjomi forest trails</td><td>Lesser Caucasus</td><td>Pine forest, mineral springs, gentle paths</td><td><span class="pill mod">crisp, doable</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">09</span><h2>Driving &amp; car rental</h2></div>
+      <p class="lead">Georgia is genuinely easy and rewarding to self-drive — right-hand traffic, signs in Georgian <em>and</em> English on main routes, airport pickups, and Google Maps works fine. The catch is assertive local driving and snowy mountain roads to Kazbegi/Gudauri in late November — so you want winter tyres and nerve, or a driver for that leg.</p>
+      <div class="card"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">The honest self-drive verdict</h3>
+        <ul>
+          <li><b>City &amp; wine country (Kakheti, Mtskheta):</b> easy, flat, well-signed — great self-drive with Sheldon in his carrier or a harness.</li>
+          <li><b>Georgian Military Road to Kazbegi:</b> spectacular but a real mountain road; in snow it demands winter tyres and confidence. Many couples take a <b>private driver</b> for this one day.</li>
+          <li><b>Paperwork:</b> carry an International Driving Permit (IDP) with your licence. Book online 2–3 days ahead — walk-up airport rates run 30–50% higher.</li>
+          <li><b>Insurance:</b> third-party is included; add <b>CDW/full cover</b> (~₾30–60/day) for mountains. Deposit ~$180–360 blocked on a credit card.</li>
+        </ul>
+      </div></div>
+      <div class="tbl-wrap" style="margin-top:14px"><table>
+        <thead><tr><th>Option</th><th>Typical price</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Economy self-drive</td><td class="num">$25–45/day</td><td>City + Kakheti + easy day trips</td></tr>
+          <tr><td class="trail">Compact/SUV self-drive</td><td class="num">$55–75/day</td><td>More comfort + light mountain roads</td></tr>
+          <tr><td class="trail">Private driver, full day</td><td class="num">$60–90/day</td><td>Kazbegi Military Road in snow — no stress</td></tr>
+          <tr><td class="trail">Shared/group day tour</td><td class="num">~$15–25/person</td><td>Cheapest, but less dog-friendly &amp; flexible</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>My suggestion for you three:</b> rent a compact for Tbilisi–Mtskheta–Kakheti (Sheldon rides with you), and book a private driver just for the Kazbegi day. Budget roughly <b>$300–450</b> total for the mix.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">10</span><h2>What it costs — 2 people + Sheldon, 10–12 days</h2></div>
+      <p class="lead">Mid-range estimate in USD (₹ at ~₹88/$). Flights are the swing factor; on-ground Georgia is one of the cheapest quality trips going.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Detail</th><th class="num">USD</th></tr></thead>
+        <tbody>
+          <tr class="sub"><td colspan="3">Before you fly — Sheldon paperwork (India / AQCS)</td></tr>
+          <tr><td>Microchip + rabies + parasite treatment</td><td>vet, if not already done</td><td class="num">$40–70</td></tr>
+          <tr><td>Vet health certificate</td><td>accredited vet</td><td class="num">$25–50</td></tr>
+          <tr><td>AQCS export exam + NOC</td><td>Bangalore, ~1 wk ahead</td><td class="num">$25–60</td></tr>
+          <tr><td>Pet relocation agent (optional)</td><td>handles AQCS + airline docs</td><td class="num">$150–350</td></tr>
+          <tr class="sub"><td colspan="3">Getting there</td></tr>
+          <tr><td>Flights ×2 (BLR ⇄ TBS)</td><td>Nov, 1-stop, economy</td><td class="num">$900–1,400</td></tr>
+          <tr><td>Sheldon in-cabin (both legs)</td><td>airline pet fee</td><td class="num">$120–300</td></tr>
+          <tr class="sub"><td colspan="3">On the ground (10–12 days)</td></tr>
+          <tr><td>Stays ×2 rooms/apt</td><td>$45–75/night × 11</td><td class="num">$550–850</td></tr>
+          <tr><td>Food &amp; wine, 2 pax</td><td>hearty, restaurants daily</td><td class="num">$350–550</td></tr>
+          <tr><td>Car rental + private driver (Kazbegi)</td><td>compact self-drive + 1 driver day</td><td class="num">$300–450</td></tr>
+          <tr><td>Local transport, tastings, entries</td><td>metro, cable cars, cellars</td><td class="num">$120–220</td></tr>
+          <tr><td>Travel + accident insurance ×2</td><td>2026 rule, +pet cover</td><td class="num">$120–220</td></tr>
+          <tr class="sub"><td colspan="3">After you return — Sheldon home (India / AQCS)</td></tr>
+          <tr><td>Re-import Advance NOC + exam</td><td>AQCS Bangalore</td><td class="num">$25–60</td></tr>
+          <tr><td>Georgian departure vet certificate</td><td>local vet</td><td class="num">$25–50</td></tr>
+          <tr class="total"><td>Estimated total</td><td>two people + Sheldon, all-in</td><td class="num">$2,900–5,200</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>Reading it:</b> roughly <b>₹2.6–4.6 lakh</b> for the whole trip. Lower end = a good flight deal, no agent; upper end = a comfortable, agent-assisted version. Sheldon's paperwork both directions is about <b>$140–650</b> depending on DIY vs agent.</div>
+    </section>
+
+    <div class="foot">
+      <p><b>Verify before booking.</b> Pet-import rules (Georgia's National Food Agency; India's AQCS/Customs), visa, insurance and fares change and are enforced at official discretion. Confirm current specifics before committing money. A planning starting point, not official clearance.</p>
+      <p class="credit">Photos: Wikimedia Commons (CC-licensed). Video thumbnails link to the respective YouTube creators. For Puneet &amp; Rachel · Sheldon, toy poodle · Bengaluru ⇄ Sakartvelo.</p>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- ============          ALMATY          ================= -->
+  <!-- ======================================================= -->
+  <div class="country" id="almaty">
+    <header class="masthead">
+      <div class="eyebrow">Pet-travel &amp; trip dossier · Rachel's 40th · 10–12 days, late Nov 2026</div>
+      <h1>Almaty</h1>
+      <div class="geo">Алматы, Kazakhstan — the Tian Shan with Sheldon · "father of apples"</div>
+      <div class="sub">A big-nature 40th with soft landings: a real city under a wall of snow-capped peaks, turquoise glacial lakes an hour away — and the easiest pet-import and visa rules of anywhere feasible from India.</div>
+      <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Big_Almaty_Lake_2.jpg/1280px-Big_Almaty_Lake_2.jpg" alt="Big Almaty Lake, Tian Shan" onerror="this.style.display='none'">
+      <div class="stamp"><b>SHELDON&nbsp;OK</b><span>NO TITRE · NO VISA</span></div>
+    </header>
+
+    <section><div class="sec-head"><span class="sec-num">01</span><h2>Taking Sheldon — the checkpoints</h2></div>
+      <p class="lead"><b>Kazakhstan requires no rabies titre test for dogs of any origin</b>, no import permit for one or two pets travelling with you, and no quarantine when compliant. The most relaxed of your feasible options. The only gate is a valid rabies shot.</p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · India</div><h3>ISO microchip</h3><p>15-digit ISO 11784/11785 chip, implanted <b>before</b> the rabies vaccination; number matches every document.</p></div>
+        <div class="step"><div class="k">Step 2 · India</div><h3>Rabies vaccination — valid before travel</h3><p>Must be at least <b>21 days old</b> and no more than 12 months old at entry. For a late-Nov trip, have his shot done by about <b>1 November 2026</b> (earlier is safer).</p><span class="tagpill">the one date that governs everything</span></div>
+        <div class="step"><div class="k">Step 3 · India</div><h3>Vet health certificate (within 5 days)</h3><p>International/EAEU-form certificate, government-vet signed — healthy + rabies-vaccinated, dated within 5 days of travel. In India this is folded into the AQCS export exam.</p></div>
+        <div class="step"><div class="k">Step 4 · India</div><h3>AQCS Bangalore export certificate + NOC</h3><p>Book AQCS ~1 week ahead; present Sheldon ~7 days before departure. Export certificate valid 10 days. <b>Keep the originals</b> for re-import.</p></div>
+        <div class="step"><div class="k">Step 5 · Almaty</div><h3>Arrival in Kazakhstan</h3><p>Enter via Almaty international airport; a vet officer may check chip + papers. No titre, no quarantine, no import permit for 1–2 pets.</p></div>
+        <div class="step home"><div class="k">Step 6 · Return</div><h3>Bringing Sheldon home to India</h3><p>Apply for an <b>Advance NOC from AQCS</b> ≥7 working days before flying back, under the <b>Re-import</b> category (Customs Circular 25/2013), using your original export docs — avoids the 15-day quarantine on fresh imports. Carry a Kazakh vet health certificate dated close to departure.</p></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">02</span><h2>Visas — the easy part</h2></div>
+      <p class="lead">Kazakhstan is the simplest of all your options: neither of you files anything in advance for a short trip.</p>
+      <div class="visa">
+        <div class="vcard"><div class="flag">Rachel · US passport</div><h3>Visa-free, up to 30 days</h3><span class="vp">No application</span><p>US citizens enter visa-free for up to 30 days per visit (max 90 in 180). Just arrive with a valid passport.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport</div><h3>Visa-free, up to 14 days</h3><span class="vp">No application</span><p>Since 2022, Indian citizens enter visa-free for up to 14 days (max 42 in 180) — perfect for this trip. Carry a confirmed return/onward ticket + proof of accommodation. Only a longer stay needs the online e-Visa.</p></div>
+      </div>
+      <div class="note"><b>Nice bonus:</b> 14 days is plenty here, so there's no embassy visit, no fee, no waiting on approval for either of you — you just show up.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">03</span><h2>Late-November weather</h2></div>
+      <p class="lead">Almaty in late November is properly cold and often snowy — Shymbulak's ski season opening, white peaks, crisp light. The city is a comfortable base to warm up in each evening; far-lake roads can be snow-affected, so do those as guided day trips with a good vehicle.</p>
+      <div class="weather">
+        <div class="wx"><div class="place">Almaty city</div><div class="temp">−3 to +3°C</div><div class="note">Cold, first snows, leafy streets, cosy cafés.</div></div>
+        <div class="wx"><div class="place">Big Almaty Lake</div><div class="temp">below freezing</div><div class="note">Frozen turquoise at ~2,500 m, snow-ringed. 4WD needed.</div></div>
+        <div class="wx"><div class="place">Shymbulak / Medeu</div><div class="temp">−5 to 0°C</div><div class="note">Snow; ski season opening; cable-car views.</div></div>
+        <div class="wx"><div class="place">Charyn Canyon</div><div class="temp">−4 to +4°C, dry</div><div class="note">Steppe cold, snow-dusted red rock.</div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">04</span><h2>What to cover — nature first, city as base</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Ascension_Cathedral_%28Almaty%29.jpg/1280px-Ascension_Cathedral_%28Almaty%29.jpg" alt="Zenkov Cathedral" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · the whole trip</div><h3>Almaty, father of apples</h3><p>The wild apple was born in these mountains ("Alma-Ata"). Leafy and food-obsessed: the <b>Green Bazaar</b> for horse-sausage, dried fruit &amp; honey; the wooden <b>Zenkov Cathedral</b> (built without a single nail); Kok-Tobe hill by cable car.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Shymbulak_ski_resort.jpg/1280px-Shymbulak_ski_resort.jpg" alt="Shymbulak" onerror="this.style.display='none'"><div class="pad"><div class="k">½ day · up the mountain</div><h3>Medeu &amp; Shymbulak</h3><p>Ride up past the Medeu skating rink to Shymbulak ski resort by gondola, into the Trans-Ili Alatau. Snow, spruce and a wall of peaks — dramatic scenery with zero trekking effort.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Big_Almaty_Lake_2.jpg/1280px-Big_Almaty_Lake_2.jpg" alt="Big Almaty Lake" onerror="this.style.display='none'"><div class="pad"><div class="k">Day trip · the icon</div><h3>Big Almaty Lake</h3><p>A milky-turquoise glacial lake at ~2,500 m, cupped by snow peaks a short drive from town — ibex and golden eagles overhead. Frozen and stunning in late November (go with a 4WD/driver; the upper checkpoint near the Kyrgyz border needs a passport).</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Charyn_Canyon_04.jpg/1280px-Charyn_Canyon_04.jpg" alt="Charyn Canyon" onerror="this.style.display='none'"><div class="pad"><div class="k">Long day / overnight · drama</div><h3>Charyn Canyon + Kaindy &amp; Kolsai</h3><p>East of the city: the red-rock <b>"Valley of Castles"</b> at Charyn, then the Tian Shan lakes — <b>Kaindy</b>, with its eerie sunken spruce forest, and the <b>Kolsai</b> lakes in deep spruce valleys. Best as a guided 1–2 day trip in November.</p></div></div>
+      </div>
+      <div class="note"><b>A comfortable 10–12 day shape:</b> Almaty base with day trips — Shymbulak/Medeu, Big Almaty Lake, a Charyn + Kaindy/Kolsai overnight, Turgen gorge, and slow city days for the bazaar, cathedral &amp; cafés. Big nature, warm bed every night — kind to a young dog.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">05</span><h2>The 11-day plan, day by day</h2></div>
+      <p class="lead">Almaty as a warm base, big nature by day, back to a cosy bed each night — the gentlest shape for a young dog in a cold month.</p>
+      <div class="itin">
+        <div class="day base"><div class="dn"><b>1</b><span>Almaty</span></div><div class="dc"><h3>Land &amp; settle</h3><p>Arrive, collect Sheldon, check into a central apartment. Easy first evening — a leafy stroll and a warming bowl of lagman.</p><span class="dtag">arrival · easy</span></div></div>
+        <div class="day base"><div class="dn"><b>2</b><span>Almaty</span></div><div class="dc"><h3>City on foot</h3><p>Green Bazaar grazing (apples, honey, kazy), the nail-free wooden Zenkov Cathedral in Panfilov Park, Kok-Tobe hill by cable car. Café-hopping.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day"><div class="dn"><b>3</b><span>Medeu/Shymbulak</span></div><div class="dc"><h3>Straight up the mountain</h3><p>Past the Medeu rink, gondola up to Shymbulak into the Trans-Ili Alatau. Snow, spruce and a wall of peaks — big views, little effort.</p><span class="dtag">nature · lift</span></div></div>
+        <div class="day"><div class="dn"><b>4</b><span>Big Almaty Lake</span></div><div class="dc"><h3>The turquoise icon</h3><p>Driver + 4WD up to the frozen milk-turquoise lake at ~2,500 m, snow peaks all around. Keep passports for the upper checkpoint.</p><span class="dtag">day trip · snow</span></div></div>
+        <div class="day base"><div class="dn"><b>5</b><span>Almaty</span></div><div class="dc"><h3>Slow city day</h3><p>Rest legs after altitude: museums, the specialty-coffee scene, First President's Park, a long Uyghur lunch. Sheldon-paced.</p><span class="dtag">rest · easy</span></div></div>
+        <div class="day"><div class="dn"><b>6</b><span>→ Charyn</span></div><div class="dc"><h3>East to the Valley of Castles</h3><p>Guided drive to Charyn Canyon — a level walk through red sandstone towers to the river. Continue toward Saty village for the night.</p><span class="dtag">canyon · transfer</span></div></div>
+        <div class="day"><div class="dn"><b>7</b><span>Kaindy / Kolsai</span></div><div class="dc"><h3>The sunken forest &amp; alpine lakes</h3><p>4WD to Lake Kaindy's ghostly submerged spruce, then the Kolsai lakes in deep spruce valleys. Snowy, quiet, cinematic.</p><span class="dtag">nature · guided</span></div></div>
+        <div class="day"><div class="dn"><b>8</b><span>→ Almaty</span></div><div class="dc"><h3>Return, unwind</h3><p>Scenic drive back to the city. Easy evening — a hammam-warm dinner and early night.</p><span class="dtag">transfer · light</span></div></div>
+        <div class="day"><div class="dn"><b>9</b><span>Turgen / foothills</span></div><div class="dc"><h3>Gorge &amp; waterfalls</h3><p>A shorter foothills day — Turgen gorge waterfalls or a lower Kok-Zhailau forest walk with city panoramas. Gentle on Sheldon.</p><span class="dtag">nature · easy</span></div></div>
+        <div class="day base"><div class="dn"><b>10</b><span>Almaty</span></div><div class="dc"><h3>Birthday day, unhurried</h3><p>Bazaar treats, one last mountain-view café, then Rachel's 40th dinner at a standout Almaty table. Toast with something local.</p><span class="dtag">the 40th 🎂</span></div></div>
+        <div class="day base"><div class="dn"><b>11</b><span>Fly home</span></div><div class="dc"><h3>Depart with Sheldon</h3><p>Final coffee, then to the airport. (Have the AQCS re-import Advance NOC already filed and export docs in hand — see section 01.)</p><span class="dtag">departure</span></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">06</span><h2>Watch before you go</h2></div>
+      <p class="lead">Hand-picked, matched to your trip — the icon lake and the eastern lakes-and-canyon run.</p>
+      <div class="vids">
+        <a class="vid" href="https://www.youtube.com/watch?v=fKcCKEOMd5c" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/fKcCKEOMd5c/hqdefault.jpg" alt="" onerror="this.style.display='none'"><div class="play"><svg viewBox="0 0 68 48"><path fill="#f00" d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z"/><path fill="#fff" d="M27 34l18-10-18-10z"/></svg></div></div><div class="vt"><b>Big Almaty Lake + Shymbulak day trip</b><span>YouTube · the icon &amp; the gondola</span></div></a>
+        <a class="vid" href="https://www.youtube.com/watch?v=_Km-gYtgeI4" target="_blank" rel="noopener"><div class="thumb"><img src="https://i.ytimg.com/vi/_Km-gYtgeI4/hqdefault.jpg" alt="" onerror="this.style.display='none'"><div class="play"><svg viewBox="0 0 68 48"><path fill="#f00" d="M66.5 7.7a8 8 0 0 0-5.6-5.7C56 .6 34 .6 34 .6s-22 0-26.9 1.4A8 8 0 0 0 1.5 7.7 83 83 0 0 0 0 24a83 83 0 0 0 1.5 16.3 8 8 0 0 0 5.6 5.7C12 47.4 34 47.4 34 47.4s22 0 26.9-1.4a8 8 0 0 0 5.6-5.7A83 83 0 0 0 68 24a83 83 0 0 0-1.5-16.3z"/><path fill="#fff" d="M27 34l18-10-18-10z"/></svg></div></div><div class="vt"><b>Charyn Canyon, Kaindy &amp; Kolsai day trip</b><span>YouTube · the eastern lakes run</span></div></a>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">07</span><h2>Must-try on the table</h2></div>
+      <p class="lead">Meat-forward, hearty and warming; the city has good Uyghur/Dungan noodle houses and a strong café scene (veg easier in Almaty than in the mountains — plan ahead).</p>
+      <div class="food">
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Beshbarmak_in_Kazakhstan.jpg/640px-Beshbarmak_in_Kazakhstan.jpg" alt="Beshbarmak" onerror="this.style.display='none'"><div class="db"><b>Beshbarmak</b><p>The national dish — meat over wide flat noodles, eaten together.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Manti_%28food%29.jpg/640px-Manti_%28food%29.jpg" alt="Manty" onerror="this.style.display='none'"><div class="db"><b>Manty</b><p>Big steamed dumplings — juicy, hearty, everywhere.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Lagman.jpg/640px-Lagman.jpg" alt="Lagman" onerror="this.style.display='none'"><div class="db"><b>Lagman</b><p>Uyghur hand-pulled noodles in a spiced broth — the warmer.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Plov_uzbek_2.jpg/640px-Plov_uzbek_2.jpg" alt="Plov" onerror="this.style.display='none'"><div class="db"><b>Plov</b><p>Fragrant rice with carrot &amp; meat, cooked in a giant kazan.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Samsa_bakery.jpg/640px-Samsa_bakery.jpg" alt="Samsa" onerror="this.style.display='none'"><div class="db"><b>Samsa</b><p>Flaky tandoor-baked pastries — the perfect mountain-day snack.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Aport_apples.jpg/640px-Aport_apples.jpg" alt="Aport apples" onerror="this.style.display='none'"><div class="db"><b>Aport apples &amp; bazaar treats</b><p>Almaty's famous giant apples, kazy sausage, honey &amp; halva at the Green Bazaar.</p></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">08</span><h2>Trails &amp; walks — November-realistic</h2></div>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Trail</th><th>Where</th><th>Feel</th><th>Nov status</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Big Almaty Lake road-walk</td><td>Ile-Alatau NP</td><td>Easy paved ascent to the turquoise lake &amp; peaks</td><td><span class="pill snow">snow / 4WD</span></td></tr>
+          <tr><td class="trail">Medeu → Shymbulak</td><td>Trans-Ili Alatau</td><td>Gondola-assisted; short snowy strolls, huge views</td><td><span class="pill easy">easy + lift</span></td></tr>
+          <tr><td class="trail">Kok-Zhailau (lower)</td><td>above Almaty</td><td>Forest-to-meadow plateau with city panoramas</td><td><span class="pill mod">doable low</span></td></tr>
+          <tr><td class="trail">Charyn Canyon floor</td><td>~200 km E</td><td>Level walk through red "castles" to the river</td><td><span class="pill easy">accessible</span></td></tr>
+          <tr><td class="trail">Kaindy Lake shore</td><td>Kolsai NP</td><td>Short walk to the sunken-forest lake</td><td><span class="pill snow">guided / snowy</span></td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">09</span><h2>Driving &amp; car rental</h2></div>
+      <p class="lead">Be honest with yourselves here: Almaty in late November is <b>not</b> an easy self-drive for first-timers. The city is navigable, but winter brings snow and challenging roads, signage/police lean Russian/Kazakh, and the best nature sits on rough mountain and steppe roads that often need a 4WD and local know-how. A <b>driver or guided day trips</b> is the smart, low-stress default — often barely pricier than renting once you add winter risk.</p>
+      <div class="card"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">The honest verdict</h3>
+        <ul>
+          <li><b>Around the city:</b> self-drive is fine, but the <b>Yandex Go</b> app (cheap, reliable taxis) makes a rental unnecessary for city days.</li>
+          <li><b>Big Almaty Lake &amp; the eastern lakes:</b> hire a <b>driver with a 4WD</b> — the winter road to Kaindy from Saty needs it, and a guide handles the border checkpoint above BAL.</li>
+          <li><b>Paperwork if you rent:</b> physical licence + IDP + a second photo ID + credit card for the deposit; book ahead as the fleet is small.</li>
+          <li><b>Winter caveat:</b> snow, limited English on the road, and cash-only toll stretches — patience and a local driver save the holiday.</li>
+        </ul>
+      </div></div>
+      <div class="tbl-wrap" style="margin-top:14px"><table>
+        <thead><tr><th>Option</th><th>Typical price</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Economy self-drive</td><td class="num">$55–75/day</td><td>City only (but Yandex is easier)</td></tr>
+          <tr><td class="trail">SUV / 4WD self-drive</td><td class="num">$85–140/day</td><td>Only if you're a confident winter driver</td></tr>
+          <tr><td class="trail">Driver + car, full day (city/BAL)</td><td class="num">$60–110/day</td><td>Big Almaty Lake, Shymbulak, relaxed</td></tr>
+          <tr><td class="trail">Guided Charyn + Kaindy/Kolsai (2-day)</td><td class="num">~$120–200/person</td><td>Far eastern lakes, incl. 4WD &amp; yurt night</td></tr>
+          <tr><td class="trail">Yandex Go taxis (city)</td><td class="num">$1.50–5/ride</td><td>Everyday city moves — no rental needed</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>My suggestion for you three:</b> skip a rental entirely. Use Yandex Go in the city and book drivers/guided trips for the mountains — safer with snow, easier with Sheldon, keeping the whole "car" line around <b>$350–600</b> for the trip.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">10</span><h2>What it costs — 2 people + Sheldon, 10–12 days</h2></div>
+      <p class="lead">Mid-range estimate in USD (₹ at ~₹88/$). Almaty runs a touch pricier on the ground than Georgia, but drivers/tours are the main variable.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Detail</th><th class="num">USD</th></tr></thead>
+        <tbody>
+          <tr class="sub"><td colspan="3">Before you fly — Sheldon paperwork (India / AQCS)</td></tr>
+          <tr><td>Microchip + rabies + parasite treatment</td><td>vet, if not already done</td><td class="num">$40–70</td></tr>
+          <tr><td>Vet health certificate (within 5 days)</td><td>accredited vet</td><td class="num">$25–50</td></tr>
+          <tr><td>AQCS export exam + NOC</td><td>Bangalore, ~1 wk ahead</td><td class="num">$25–60</td></tr>
+          <tr><td>Pet relocation agent (optional)</td><td>handles AQCS + airline docs</td><td class="num">$150–350</td></tr>
+          <tr class="sub"><td colspan="3">Getting there</td></tr>
+          <tr><td>Flights ×2 (BLR ⇄ ALA)</td><td>Nov, 1-stop, economy</td><td class="num">$800–1,400</td></tr>
+          <tr><td>Sheldon in-cabin (both legs)</td><td>airline pet fee</td><td class="num">$120–300</td></tr>
+          <tr class="sub"><td colspan="3">On the ground (10–12 days)</td></tr>
+          <tr><td>Stays ×2 rooms/apt</td><td>$50–85/night × 11</td><td class="num">$600–950</td></tr>
+          <tr><td>Food, 2 pax</td><td>restaurants daily</td><td class="num">$400–600</td></tr>
+          <tr><td>Drivers / guided trips (no rental)</td><td>BAL, Charyn+lakes overnight, Shymbulak</td><td class="num">$350–600</td></tr>
+          <tr><td>Yandex taxis, gondolas, entries</td><td>city moves, lifts, parks</td><td class="num">$120–220</td></tr>
+          <tr><td>Travel + pet insurance ×2</td><td>recommended</td><td class="num">$100–200</td></tr>
+          <tr class="sub"><td colspan="3">After you return — Sheldon home (India / AQCS)</td></tr>
+          <tr><td>Re-import Advance NOC + exam</td><td>AQCS Bangalore</td><td class="num">$25–60</td></tr>
+          <tr><td>Kazakh departure vet certificate</td><td>local vet</td><td class="num">$25–50</td></tr>
+          <tr class="total"><td>Estimated total</td><td>two people + Sheldon, all-in</td><td class="num">$2,900–5,300</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>Reading it:</b> roughly <b>₹2.6–4.7 lakh</b> for the whole trip. Visa cost is zero for both of you — a real saving vs most destinations. Sheldon's paperwork both directions is about <b>$140–650</b> depending on DIY vs agent.</div>
+    </section>
+
+    <div class="foot">
+      <p><b>Verify before booking.</b> Kazakhstan's veterinary import rules, India's AQCS/Customs procedures, visa rules and fares change and are enforced at official discretion. Confirm current specifics before committing money. A planning starting point, not official clearance.</p>
+      <p class="credit">Photos: Wikimedia Commons (CC-licensed). Video thumbnails link to the respective YouTube creators. For Puneet &amp; Rachel · Sheldon, toy poodle · Bengaluru ⇄ Almaty.</p>
+    </div>
+  </div>
+
+</div><!-- /.wrap -->
+
+<script>
+  (function(){
+    var body = document.body;
+    var tabs = document.querySelectorAll('.switch button');
+    var panels = document.querySelectorAll('.country');
+    function show(id){
+      panels.forEach(function(p){ p.classList.toggle('active', p.id === id); });
+      tabs.forEach(function(t){ t.setAttribute('aria-selected', String(t.dataset.target === id)); });
+      body.setAttribute('data-country', id);
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+    tabs.forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.target); }); });
+  })();
+</script>
+</body>
+</html>
