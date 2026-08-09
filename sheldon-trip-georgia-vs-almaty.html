@@ -33,15 +33,40 @@
     background-image:radial-gradient(circle at 88% -4%,rgba(0,0,0,.04),transparent 42%);}
   .wrap{max-width:980px;margin:0 auto;padding:20px 20px 90px}
   h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.08;margin:0}
+  body[data-country="georgia-armenia"]{
+    --paper:#F4EDE6;--paper-2:#FBF6F0;--card:#FFFCF8;
+    --ink:#2B211D;--ink-soft:#6A574E;--ink-faint:#9C8A7E;
+    --p1:#9C3B28;--p1-deep:#6E2618;--p2:#2E4A6B;--p2-deep:#1D3049;
+    --gold:#C98A2E;--line:#E6DACE;--line-soft:#F0E7DC;--accent:#9C3B28;
+    --font-display:"Cormorant Garamond",Georgia,serif;
+    --font-body:"Work Sans",system-ui,sans-serif;
+  }
+  body[data-country="georgia-azerbaijan"]{
+    --paper:#E9EFEF;--paper-2:#F4F9F9;--card:#FCFFFF;
+    --ink:#12232B;--ink-soft:#48606C;--ink-faint:#879AA4;
+    --p1:#0E6E7A;--p1-deep:#08454D;--p2:#8C2230;--p2-deep:#5E1420;
+    --gold:#C4922B;--line:#D3DEDE;--line-soft:#E3ECEC;--accent:#8C2230;
+    --font-display:"Space Grotesk",system-ui,sans-serif;
+    --font-body:"Karla",system-ui,sans-serif;
+  }
+  body[data-country="georgia-azerbaijan"] h1,body[data-country="georgia-azerbaijan"] h2,
+  body[data-country="georgia-azerbaijan"] h3{letter-spacing:-.01em}
+  body[data-country="georgia-azerbaijan"] .masthead .geo{font-style:normal;
+    font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.06em}
   body[data-country="kazakhstan"] h1,body[data-country="kazakhstan"] h2,body[data-country="kazakhstan"] h3{letter-spacing:-.01em}
   a{color:var(--p1)}
 
   /* ---------- sticky country switcher ---------- */
-  .switch{position:sticky;top:0;z-index:20;display:flex;gap:8px;justify-content:center;padding:14px 0 12px;margin-bottom:6px;
+  .switch{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:14px 0 12px;margin-bottom:6px;
     background:linear-gradient(var(--paper),var(--paper) 70%,transparent)}
   .switch button{font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;padding:9px 20px;border-radius:24px;border:1.5px solid var(--line);background:var(--card);color:var(--ink-soft);cursor:pointer;font-weight:600;transition:.15s}
   .switch button[aria-selected="true"]{background:var(--p1);color:#fff;border-color:var(--p1)}
   .switch button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+  .switch button .d{display:inline-block;margin-left:7px;font-size:9px;letter-spacing:.06em;padding:2px 6px;
+    border-radius:10px;background:var(--line-soft);color:var(--ink-faint);vertical-align:1px}
+  .switch button[aria-selected="true"] .d{background:rgba(255,255,255,.22);color:#fff}
+  @media(max-width:620px){.switch{gap:6px;padding:10px 0 9px}
+    .switch button{font-size:11.5px;padding:7px 13px}.switch button .d{display:none}}
 
   .country{display:none}
   .country.active{display:block;animation:fade .25s ease}
@@ -201,6 +226,18 @@
   .lb-film img.on{opacity:1;border-color:#fff}
   @media(max-width:620px){.lb-slide{padding:0 10px}.lb-nav{width:34px;height:50px;font-size:21px}
     .lb-cap b{font-size:16px}.lb-cap p{font-size:12px}.lb-film img{width:50px;height:34px}}
+  /* ---------- why this combination ---------- */
+  .why{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--p2);border-radius:8px;
+    padding:8px 20px 18px;box-shadow:var(--shadow)}
+  .why ul{margin:0;padding-left:0;list-style:none}
+  .why li{position:relative;padding-left:27px;margin-top:13px;font-size:15px;line-height:1.55}
+  .why li::before{content:"→";position:absolute;left:0;top:0;color:var(--p2);font-weight:700}
+  .pairstat{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 15px}
+  .pairstat div{flex:1;min-width:132px;background:var(--paper-2);border:1px solid var(--line-soft);
+    border-radius:7px;padding:10px 13px}
+  .pairstat b{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px}
+  .pairstat span{font-size:15px;font-weight:600;line-height:1.3;display:block}
   /* ---------- flights ---------- */
   .flights{display:grid;gap:12px;margin-top:4px}
   .fl{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:15px 17px;position:relative;box-shadow:var(--shadow)}
@@ -250,6 +287,8 @@
   <nav class="switch" role="tablist" aria-label="Choose a country">
     <button role="tab" data-target="georgia" aria-selected="true">🇬🇪 Georgia</button>
     <button role="tab" data-target="kazakhstan" aria-selected="false">🇰🇿 Kazakhstan</button>
+    <button role="tab" data-target="georgia-armenia" aria-selected="false">🇬🇪🇦🇲 Georgia + Armenia<span class="d">15d</span></button>
+    <button role="tab" data-target="georgia-azerbaijan" aria-selected="false">🇬🇪🇦🇿 Georgia + Azerbaijan<span class="d">15d</span></button>
   </nav>
 
   <!-- ======================================================= -->
@@ -756,6 +795,563 @@
     <div class="foot">
       <p><b>Verify before booking.</b> Kazakhstan's veterinary import rules, India's AQCS/Customs procedures, visa rules and fares change and are enforced at official discretion. Confirm current specifics before committing money. A planning starting point, not official clearance.</p>
       <p class="credit">Photos: Wikimedia Commons (CC-licensed); gallery photographers &amp; licences are in each image tooltip. Video thumbnails link to the respective YouTube creators. For Puneet &amp; Rachel · Sheldon, toy poodle · Bengaluru ⇄ Qazaqstan.</p>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- ============     GEORGIA + ARMENIA     ================ -->
+  <!-- ======================================================= -->
+  <div class="country" id="georgia-armenia">
+    <header class="masthead">
+      <div class="eyebrow">Pet-travel &amp; trip dossier · Rachel's 40th · 15 days, 18 Nov – 2 Dec 2026</div>
+      <h1>Georgia + Armenia</h1>
+      <div class="geo">საქართველო · Հայաստան — two countries, one road between them</div>
+      <div class="sub">The easy two-country trip. Eight days of Georgian mountains and wine, a four-hour drive south over the friendliest border in the Caucasus, then seven days of Armenian monasteries with Ararat on the skyline — and <b>Sheldon crosses in the car</b>, never needing a second seat on a plane.</div>
+      <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg/1280px-Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg" alt="Khor Virap monastery below Mount Ararat" onerror="this.style.display='none'">
+      <div class="stamp"><b>SHELDON&nbsp;OK</b><span>NO TITRE · DRIVE ACROSS</span></div>
+    </header>
+
+    <section><div class="sec-head"><span class="sec-num">01</span><h2>Why this combination works</h2></div>
+      <p class="lead">Of every pairing within reach of a fixed late-November date, this is the one that asks the least of you and the least of Sheldon. The reason is simple and slightly unglamorous: <b>you can drive between them.</b></p>
+      <div class="pairstat">
+        <div><b>Border crossing</b><span>4-hour drive</span></div>
+        <div><b>Extra flights for Sheldon</b><span>None</span></div>
+        <div><b>Rabies titre test</b><span>Not required</span></div>
+        <div><b>The split</b><span>8 days + 7 days</span></div>
+      </div>
+      <div class="why">
+        <ul>
+          <li><b>One border, one road, no second aeroplane.</b> Sheldon rides across the Sadakhlo–Bagratashen crossing on someone's lap. Every other pairing nearby — Azerbaijan, Turkey, anything in Central Asia — needs him booked into a second airline's cabin, with a second set of slots to compete for and a second chance to be told no at the gate.</li>
+          <li><b>Armenia asks less of a dog than anywhere else in the region.</b> A microchip, a current rabies shot, and a vet health certificate issued in Georgia. No titre test, no 90-day wait, no import permit for one or two pets, no quarantine. Turkey — the country you first asked about — needs a rabies titre <em>and</em> a 90-day wait from the blood draw, which simply does not fit fixed November dates.</li>
+          <li><b>It costs you no extra flying.</b> Fly Turkish into Tbilisi, leave Turkish out of Yerevan. An open-jaw on one ticket, one airline, Sheldon in the cabin both times, and not a single kilometre retraced.</li>
+          <li><b>They are far less alike than the map suggests.</b> Georgia is Orthodox, wine-drunk and Black Sea–facing, its feasts built around a tamada and 8,000-year-old clay-buried qvevri. Armenia is the world's oldest Christian state, its churches carved from rose tuff and set in bare gorges, with Ararat — the mountain on its coat of arms, sitting just over a closed Turkish border — visible from half of Yerevan. Two weeks reads as two trips, not one long one.</li>
+          <li><b>Fifteen days divides cleanly.</b> Eight days in Georgia, with Rachel's birthday on <b>23 November</b> landing on day six in Tbilisi, where the sulphur baths and the best table in the country are. Then one travel day, then seven days in Armenia. Nothing is rushed and nothing repeats.</li>
+        </ul>
+      </div>
+      <div class="note"><b>The honest trade-off:</b> Armenia in late November is <em>cold</em> — Yerevan hovers near freezing, and the monasteries are colder still. You said the second country needn't be cold but should be memorable; this pairing buys ease and pays for it in temperature. If warmth matters more than simplicity, the <b>Georgia + Azerbaijan</b> tab is the milder trip, at the cost of one extra flight for Sheldon.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">02</span><h2>Taking Sheldon — what happens in India</h2></div>
+      <p class="lead">Identical to the Georgia-only trip, because Georgia is still where he lands. Everything here happens in Bangalore <b>before</b> you fly, and the paperwork you collect is what lets him back into India at the end.</p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · India</div><h3>ISO microchip</h3><p>15-digit ISO 11784/11785 chip, implanted <b>before</b> the rabies vaccination. The same number has to appear on every document that follows.</p></div>
+        <div class="step"><div class="k">Step 2 · India</div><h3>Rabies vaccination</h3><p>Georgia wants it at least <b>30 days</b> before arrival, Armenia wants it current, and Turkish Airlines wants 30 days too. Work to the strictest: shot completed by about <b>23 October 2026</b>.</p><span class="tagpill">the one date that governs everything</span></div>
+        <div class="step"><div class="k">Step 3 · India</div><h3>Parasite treatment</h3><p>Deworming plus tick and flea treatment before travel — sensible anyway after the tick-fever — recorded on his card.</p></div>
+        <div class="step"><div class="k">Step 4 · India</div><h3>AQCS Bangalore export certificate + NOC</h3><p>Book the appointment about a week ahead and present Sheldon roughly 7 days before departure. The export certificate is valid only 10 days. <b>Keep every original</b> — these are what let him re-enter India without quarantine.</p></div>
+        <div class="step"><div class="k">Step 5 · Tbilisi</div><h3>Arrival in Georgia</h3><p>National Food Agency may scan the chip and check documents. No titre, no quarantine when compliant.</p></div>
+      </div>
+      <div class="note"><b>Do this one thing early:</b> because you now fly home from <b>Yerevan</b>, not Tbilisi, the AQCS <b>Advance NOC</b> for re-import has to be applied for at least <b>7 working days</b> before your 2 December flight — which means filing it around day 5 of the trip, from Georgia. Start the application before you leave India if you can.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">03</span><h2>Crossing into Armenia with Sheldon</h2></div>
+      <p class="lead">This is the part that makes the whole trip work, and it is genuinely undramatic. The Georgia–Armenia border is widely described as the easiest crossing in the Caucasus, and a dog changes that surprisingly little. The one thing you must not skip: <b>the health certificate is issued in Georgia, not Armenia.</b></p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · Tbilisi, day 8</div><h3>Get a Georgian vet health certificate</h3><p>Visit a Tbilisi vet a day or two before crossing for a health certificate for non-commercial movement, dated within 10 days of travel. This — not your Indian paperwork — is the document Armenian border vets actually read. Have Sheldon's chip number, rabies record and your passport with you.</p><span class="tagpill">book the vet before you leave Kakheti</span></div>
+        <div class="step"><div class="k">Step 2 · Book the car</div><h3>Hire a driver, not a rental</h3><p>Most Georgian rental agreements forbid taking the car out of the country, and the ones that allow it need paperwork arranged days ahead. A Tbilisi–Yerevan private transfer costs roughly <b>$120–180</b>, takes 4–5 hours, and a driver who crosses weekly will walk you through the vet window without a word of Armenian.</p></div>
+        <div class="step"><div class="k">Step 3 · The border</div><h3>Sadakhlo – Bagratashen</h3><p>The main Tbilisi–Yerevan road crossing. Expect to be asked to step out and open the doors with Sheldon restrained, then to park and bring the papers inside. Officers scan the microchip and check dates, stamps, signatures and that the owner's name matches your passport. <b>Carry originals, not photocopies.</b> Ten minutes on a good day, an hour if the vet officer is on the phone to a superior.</p></div>
+        <div class="step"><div class="k">Step 4 · Armenia</div><h3>What Armenia does not ask for</h3><p>No rabies titre. No import permit for one or two pets travelling with their owner. No quarantine. This is the lightest pet-entry regime of anywhere you could reasonably reach on these dates.</p></div>
+        <div class="step"><div class="k">Step 5 · Yerevan, day 13–14</div><h3>An Armenian vet certificate for the flight home</h3><p>The return leg leaves from Yerevan, so the fresh health certificate has to come from an <b>Armenian</b> vet, dated close to departure. Book it two days before you fly, not the morning of.</p></div>
+        <div class="step home"><div class="k">Step 6 · Return</div><h3>Bringing Sheldon home to India</h3><p>With the <b>AQCS Advance NOC</b> already filed under the <b>Re-import</b> category (Customs Circular 25/2013) using your original Bangalore export documents, he comes home without the 15-day quarantine that fresh imports face. This is why the originals matter.</p></div>
+      </div>
+      <div class="note"><b>What you are carrying across, in one line:</b> microchip certificate · Indian rabies record · the AQCS export certificate and NOC (originals) · a Georgian vet health certificate under 10 days old · and later, an Armenian one for the way home.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">04</span><h2>Getting there — the flights</h2></div>
+      <p class="lead">Same constraint as the single-country trips: the nonstops from India can't carry Sheldon. IndiGo takes no pets on international routes, so the direct Tbilisi flight is out. What changes here is the shape — you want an <b>open-jaw</b>, into Tbilisi and out of Yerevan.</p>
+      <div class="flights">
+        <div class="fl best">
+          <div class="fl-top"><h3>Turkish Airlines, open-jaw</h3><span class="verdict">Book this</span></div>
+          <div class="route">BLR → IST → TBS &nbsp;·&nbsp; EVN → IST → BLR &nbsp;·&nbsp; one ticket</div>
+          <p>Turkish flies to both Tbilisi and Yerevan through Istanbul, so a multi-city booking gets you in one end and out the other with Sheldon <b>in the cabin</b> throughout, and no backtracking to Georgia to fly home.</p>
+          <ul>
+            <li><b>8 kg including the carrier</b> — a toy poodle and a soft bag come to about 4–5 kg, so he has room to spare.</li>
+            <li><b>Economy only</b>; pets aren't allowed in Business, so don't upgrade onto a flight he can't board.</li>
+            <li><b>Soft carrier only</b>, max 40 × 30 × 23 cm.</li>
+            <li><b>Two pet slots to reserve, not one</b> — outbound and return are separate flights with separate limits. Book both the day you book yourselves.</li>
+            <li><b>You only transit Istanbul, never enter it.</b> Staying airside on one airline means Turkey's rabies titre rule never applies to you. Clear immigration for a stopover and it would.</li>
+          </ul>
+          <span class="cabin">In-cabin pet fee ≈ €100–150 per leg</span>
+        </div>
+        <div class="fl no">
+          <div class="fl-top"><h3>Anything routed through the Gulf</h3><span class="verdict">Avoid</span></div>
+          <div class="route">via DXB / DOH / AUH</div>
+          <p>Emirates, Qatar and Etihad carry pets only in the hold, never the cabin — and their hubs are the ones most disrupted by the current Middle East airspace closures. With a dog and a connection to make, it is the wrong place to be standing.</p>
+        </div>
+      </div>
+      <div class="note"><b>A stopover thought, since you'll be changing planes there anyway:</b> Istanbul is tantalising and it is also the one thing this trip cannot have. Entering Türkiye with Sheldon needs a rabies titre drawn 90 days beforehand. Transit airside and you're fine; step out for a night and you are not.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">05</span><h2>Visas — two countries, two passports</h2></div>
+      <p class="lead">Three of the four combinations need nothing at all. The one application to actually file is Puneet's Armenian e-visa, and it is cheap and fast.</p>
+      <div class="visa">
+        <div class="vcard"><div class="flag">Rachel · US passport · Georgia</div><h3>Visa-free, up to 1 year</h3><span class="vp">No application</span><p>Arrive with a passport valid 6+ months. Nothing to file.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport · Georgia</div><h3>e-Visa — or visa-free with a US/UK/Schengen visa</h3><span class="vp step">One online step</span><p>A valid <b>US, UK or Schengen visa or residence permit</b> makes it visa-free. Otherwise the <b>e-Visa at evisa.gov.ge</b> (~$20, about 5 business days).</p></div>
+        <div class="vcard"><div class="flag">Rachel · US passport · Armenia</div><h3>Visa-free</h3><span class="vp">No application</span><p>US citizens enter Armenia visa-free. Again, nothing to file.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport · Armenia</div><h3>e-Visa, 21 days</h3><span class="vp step">One online step</span><p>Apply at <b>evisa.mfa.am</b> — around <b>₹650</b> for a 21-day single entry, fully online, no embassy visit. Travel insurance is required with the application. <em>(The 2026 visa-free window for Indians needs a US/EU/Gulf <b>residence permit</b> and closed on 1 July, so it doesn't help here.)</em></p></div>
+      </div>
+      <div class="note"><b>Don't forget the Georgian insurance rule:</b> since 1 January 2026 every visitor to Georgia must carry health and accident cover of at least 30,000 GEL (~$11,000). Buy one policy that covers both countries, the full 15 days, and includes trip disruption.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">06</span><h2>Geopolitical stability — an honest read</h2></div>
+      <p class="lead">Two countries, two different risk pictures. Neither is touched by the Middle East war on the ground, though Armenia sits closer to it than anywhere else on this trip — it shares a short border with Iran.</p>
+      <div class="geoscore">
+        <div class="gs-num"><b>7.0<i>/10</i></b><span>Georgia</span></div>
+        <div class="gs-verdict"><b>Go — with your eyes open</b>
+          <p>Safe to walk around; the instability is political theatre on one avenue in Tbilisi, plus occupied regions you never go near.</p></div>
+      </div>
+      <div class="bars">
+        <div class="bar"><span class="bl">Distance from the Middle East war</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · no involvement</span></div>
+        <div class="bar warn"><span class="bl">Domestic political stability</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · recurring protests</span></div>
+        <div class="bar warn"><span class="bl">Russia &amp; frozen-conflict exposure</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · occupied regions</span></div>
+        <div class="bar"><span class="bl">Everyday safety &amp; crime</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · very low risk</span></div>
+        <div class="bar warn"><span class="bl">Flight-route exposure</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · fine via Istanbul</span></div>
+      </div>
+      <div class="geoscore" style="margin-top:18px">
+        <div class="gs-num"><b>6.8<i>/10</i></b><span>Armenia</span></div>
+        <div class="gs-verdict"><b>Go — but stay off the eastern border</b>
+          <p>Yerevan and everything in this itinerary are calm and notably low-crime. The risk is geographic and easy to avoid: the frontier with Azerbaijan.</p></div>
+      </div>
+      <div class="bars">
+        <div class="bar warn"><span class="bl">Distance from the Middle East war</span><span class="bt"><i style="width:60%"></i></span><span class="bv">6 · borders Iran</span></div>
+        <div class="bar"><span class="bl">Domestic political stability</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · stable, peaceful transfers</span></div>
+        <div class="bar risk"><span class="bl">Border tension with Azerbaijan</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · avoid the frontier</span></div>
+        <div class="bar"><span class="bl">Everyday safety &amp; crime</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · very low risk</span></div>
+        <div class="bar warn"><span class="bl">Flight-route exposure</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · fine via Istanbul</span></div>
+      </div>
+      <div class="card" style="margin-top:16px"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">What this means in practice</h3>
+        <ul>
+          <li><b>The Middle East war:</b> neither country is a participant. Armenia's short southern border with Iran is worth knowing about but has produced no spillover for travellers; the practical effect on you is still <b>aviation</b>, which the Istanbul routing largely handles.</li>
+          <li><b>Tbilisi protests:</b> frequent, sometimes large, concentrated on <b>Rustaveli Avenue by Parliament</b>, usually after dark. They have not spread to Kazbegi or Kakheti. Walk away from crowds and don't take Sheldon near one.</li>
+          <li><b>Armenia's eastern frontier:</b> the border with Azerbaijan has seen flare-ups and is not a place to wander. Everything in this itinerary — Yerevan, Geghard, Garni, Khor Virap, Noravank, Sevan, Dilijan, Haghpat — sits well clear of it. If you add <b>Tatev</b> in the far south, check advisories for Syunik first; the monastery itself is routinely visited.</li>
+          <li><b>Georgia's occupied regions:</b> Abkhazia and South Ossetia are closed and non-negotiable. Nothing here goes near them.</li>
+          <li><b>Official read:</b> the US State Department rates <b>Georgia Level 1</b>. Armenia carries a low-level advisory with a specific carve-out for the Azerbaijan border zone — which is exactly how to read it: fine country, one region to skip.</li>
+        </ul>
+      </div></div>
+      <div class="note"><b>How to read these scores:</b> our composite judgement across the five factors, weighted for <em>two tourists and a small dog on a two-week trip</em>. Not an official index. Re-check a month before you fly.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">07</span><h2>Late-November weather</h2></div>
+      <p class="lead">Cold, quiet and cheap in both countries — snow on the peaks, bare vines, empty monasteries, roughly 9–10 hours of daylight. Armenia is the colder and drier of the two; Yerevan is high, sunny and near freezing.</p>
+      <div class="weather">
+        <div class="wx"><div class="place">Tbilisi</div><div class="temp">8–12°C day</div><div class="note">Mild, sometimes grey. Old town, baths, wine bars.</div></div>
+        <div class="wx"><div class="place">Kazbegi</div><div class="temp">−5 to +5°C</div><div class="note">Early winter, snowy peaks. Gergeti needs winter shoes.</div></div>
+        <div class="wx"><div class="place">Yerevan</div><div class="temp">2–9°C day</div><div class="note">Cold, dry, often brilliantly sunny. Ararat at its clearest.</div></div>
+        <div class="wx"><div class="place">Sevan &amp; Dilijan</div><div class="temp">−4 to +4°C</div><div class="note">Lake wind and forest; first snow on the passes.</div></div>
+      </div>
+      <div class="note"><b>The upside of the cold:</b> late November is when Ararat is most often out from behind its haze — and Khor Virap with a snow-capped Ararat behind it is the photograph this whole leg is built around.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">08</span><h2>Georgia — the eight days</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Old_Town%2C_Tbilisi%2C_Georgia_%2848808779832%29.jpg/1280px-Old_Town%2C_Tbilisi%2C_Georgia_%2848808779832%29.jpg" alt="Old Tbilisi" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · 4 nights across the leg</div><h3>Old Tbilisi</h3><p>Carved wooden balconies under Narikala, the domed <b>sulphur bathhouses</b> of Abanotubani, natural-wine bars, the Dry Bridge flea market. Walkable, dog-tolerant and cheap — and the right place for a 40th dinner.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Kazbegi%2C_Gergeti_Trinity_Church_and_Mt_Kazbek_%2835959311351%29.jpg/1280px-Kazbegi%2C_Gergeti_Trinity_Church_and_Mt_Kazbek_%2835959311351%29.jpg" alt="Kazbegi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · the drama</div><h3>Military Road → Kazbegi</h3><p>Ananuri fortress on its reservoir, the Gudauri viewpoint, then Stepantsminda where <b>Gergeti Trinity</b> stands alone beneath 5,047 m Mt Kazbek. In snow, the defining image of Georgia.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Sighnaghi%2C_Georgia.jpg/1280px-Sighnaghi%2C_Georgia.jpg" alt="Sighnaghi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · wine country</div><h3>Kakheti &amp; Sighnaghi</h3><p>A walled hilltop "city of love" with terracotta roofs and Caucasus views. Family <b>qvevri wineries</b> pour amber wine straight from buried clay; Bodbe convent sits among cypresses.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Mtskheta%2C_Jvari_Monastery%2C_Church%2C_Georgia.jpg/1280px-Mtskheta%2C_Jvari_Monastery%2C_Church%2C_Georgia.jpg" alt="Jvari Monastery" onerror="this.style.display='none'"><div class="pad"><div class="k">Half day · 40 min out</div><h3>Mtskheta</h3><p>The ancient spiritual capital, UNESCO-listed: hilltop <b>Jvari Monastery</b> above the meeting of two rivers, and the 11th-century Svetitskhoveli cathedral below.</p></div></div>
+      </div>
+      <div class="note">The full Georgian detail — trails, driving, food, the longer list of towns — lives on the <b>Georgia</b> tab. This leg is that trip, trimmed to its best eight days.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">09</span><h2>Armenia — the seven days</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg/1280px-Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg" alt="Yerevan Cascade" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · 5 nights</div><h3>Yerevan, the pink city</h3><p>Built almost entirely from rose-and-apricot volcanic tuff, and older than Rome. The <b>Cascade</b>'s stone staircase of sculpture terraces, Republic Square's singing fountains, the <b>Vernissage</b> flea market for silver and Soviet cameras, and a café culture that takes coffee seriously. Ararat closes the end of half the streets.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg/1280px-2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg" alt="Geghard Monastery" onerror="this.style.display='none'"><div class="pad"><div class="k">Day trip · 45 min out</div><h3>Geghard &amp; Garni</h3><p><b>Geghard</b> is half-carved directly into the cliff — chambers hewn from living rock, with a spring inside and acoustics that will stop you talking. Twenty minutes away, <b>Garni</b> is a Greco-Roman colonnaded temple on a gorge edge, the only one of its kind east of Turkey.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg/1280px-Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg" alt="Khor Virap" onerror="this.style.display='none'"><div class="pad"><div class="k">Day trip · the icon</div><h3>Khor Virap, Noravank &amp; Areni</h3><p><b>Khor Virap</b> sits alone on the plain with Ararat filling the sky behind it — the picture of Armenia. Then the red-rock gorge to <b>Noravank</b>, and <b>Areni</b>, where a cave held the world's oldest known winery at 6,100 years. The wine is still being made a few hundred metres away.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Sevanavank_on_1.09.23%2C_36.jpg/1280px-Sevanavank_on_1.09.23%2C_36.jpg" alt="Sevanavank on Lake Sevan" onerror="this.style.display='none'"><div class="pad"><div class="k">On the way south · day 10</div><h3>Dilijan &amp; Lake Sevan</h3><p><b>Dilijan</b> is Armenia's forested spa town, all wooden balconies in a wooded valley — "little Switzerland". Then <b>Sevanavank</b>, a 9th-century monastery on a peninsula in the vast blue of Lake Sevan, at 1,900 m one of the highest big lakes on earth.</p></div></div>
+      </div>
+      <div class="note"><b>Worth knowing about Tatev:</b> the cliff-top monastery reached by the world's longest reversible cable car is spectacular — and roughly four hours south of Yerevan each way, into Syunik. It works as an overnight, not a day trip. Left out of the plan below on purpose; swap it in for the slow Yerevan day if you'd rather have the drama.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">10</span><h2>The 15-day plan, day by day</h2></div>
+      <p class="lead">Anchored on the one fixed point: <b>Rachel's 40th on 23 November</b>, day six, in Tbilisi — with the mountains done, the baths open, and no driving that day.</p>
+      <div class="itin">
+        <div class="day base"><div class="dn"><b>1</b><span>18 Nov · Tbilisi</span></div><div class="dc"><h3>Land &amp; settle in the old town</h3><p>Arrive, collect Sheldon, check into an old-town apartment. A gentle evening through Abanotubani's lanes; first khinkali, first glass of amber wine.</p><span class="dtag">arrival · easy</span></div></div>
+        <div class="day base"><div class="dn"><b>2</b><span>19 Nov · Tbilisi</span></div><div class="dc"><h3>Old Tbilisi on foot</h3><p>Narikala by cable car, the sulphur baths, the Dry Bridge market, the Fabrika courtyard. A long lunch and a natural-wine bar-hop at dusk.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day base"><div class="dn"><b>3</b><span>20 Nov · Mtskheta</span></div><div class="dc"><h3>Day trip to the old capital</h3><p>Half a day at Jvari Monastery above the two rivers and Svetitskhoveli cathedral, back to Tbilisi for a supra in the evening.</p><span class="dtag">day trip · 40 min</span></div></div>
+        <div class="day"><div class="dn"><b>4</b><span>21 Nov · → Kazbegi</span></div><div class="dc"><h3>The Georgian Military Road north</h3><p>Private driver for the day: Ananuri fortress, the Gudauri viewpoint, then Stepantsminda. Into a guesthouse with the Kazbek view.</p><span class="dtag">transfer · scenic</span></div></div>
+        <div class="day"><div class="dn"><b>5</b><span>22 Nov · Kazbegi</span></div><div class="dc"><h3>Gergeti &amp; the mountains</h3><p>Up to Gergeti Trinity for the postcard, then the near-level Truso Valley walk past mineral springs. Drive back to Tbilisi in the late afternoon. <em>File the AQCS Advance NOC today.</em></p><span class="dtag">nature · snow</span></div></div>
+        <div class="day base"><div class="dn"><b>6</b><span>23 Nov · Tbilisi</span></div><div class="dc"><h3>Rachel's 40th — unhurried, no driving</h3><p>A slow morning, Turtle Lake or Mtatsminda for the view, then a long soak in a private sulphur hammam. Dinner at the best table in Tbilisi, and a toast with something amber and eight thousand years old.</p><span class="dtag">the 40th 🎂</span></div></div>
+        <div class="day"><div class="dn"><b>7</b><span>24 Nov · → Kakheti</span></div><div class="dc"><h3>Into wine country</h3><p>East to Sighnaghi, the walled hilltop town. Check into a small guesthouse; sunset over the Alazani valley with the Caucasus behind it.</p><span class="dtag">wine · quaint</span></div></div>
+        <div class="day"><div class="dn"><b>8</b><span>25 Nov · Kakheti → Tbilisi</span></div><div class="dc"><h3>Qvevri cellars, then back to town</h3><p>Family wineries pouring straight from buried clay, the Bodbe convent among its cypresses, a long Kakhetian lunch. Back to Tbilisi — and <b>the vet appointment for Sheldon's Georgian health certificate</b>.</p><span class="dtag">wine · paperwork day</span></div></div>
+        <div class="day"><div class="dn"><b>9</b><span>26 Nov · → Armenia</span></div><div class="dc"><h3>Across the border, monasteries on the way</h3><p>Driver south to <b>Sadakhlo–Bagratashen</b>. Once through, stop at the UNESCO pair <b>Haghpat</b> and <b>Sanahin</b> in the Debed canyon — 10th-century, mossy and almost empty in November — then on to Dilijan for the night.</p><span class="dtag">border · 4–5 hrs</span></div></div>
+        <div class="day"><div class="dn"><b>10</b><span>27 Nov · → Yerevan</span></div><div class="dc"><h3>Forest town, high lake, capital</h3><p>A morning in Dilijan's wooden-balconied old street, then up to <b>Sevanavank</b> on its peninsula in Lake Sevan, and down into Yerevan by evening.</p><span class="dtag">transfer · scenic</span></div></div>
+        <div class="day base"><div class="dn"><b>11</b><span>28 Nov · Yerevan</span></div><div class="dc"><h3>The pink city on foot</h3><p>The Cascade and its sculpture terraces, Republic Square, the Vernissage market, and a slow crawl of Yerevan's very good coffee bars. Ararat over the rooftops all day.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day"><div class="dn"><b>12</b><span>29 Nov · Geghard &amp; Garni</span></div><div class="dc"><h3>Carved into the rock</h3><p>Geghard's rock-hewn chambers and their extraordinary acoustics, the Garni temple on its gorge, and a lavash-baking stop in a village tonir on the way back.</p><span class="dtag">day trip · 45 min</span></div></div>
+        <div class="day"><div class="dn"><b>13</b><span>30 Nov · Ararat plain</span></div><div class="dc"><h3>Khor Virap, Noravank &amp; the oldest winery</h3><p>Khor Virap with Ararat behind it in the clear cold air, the red gorge up to Noravank, and a tasting at Areni where wine has been made for six thousand years.</p><span class="dtag">the big one · snow-clear</span></div></div>
+        <div class="day base"><div class="dn"><b>14</b><span>1 Dec · Yerevan</span></div><div class="dc"><h3>Slow day, and the vet</h3><p>Markets, the brandy factory if you fancy it, a last long lunch. <b>Sheldon's Armenian health certificate today</b>, and a final check that the AQCS re-import NOC is in hand.</p><span class="dtag">rest · paperwork</span></div></div>
+        <div class="day base"><div class="dn"><b>15</b><span>2 Dec · Fly home</span></div><div class="dc"><h3>Depart with Sheldon</h3><p>Last coffee under the Cascade, then Zvartnots airport and Turkish home via Istanbul — with every original document in the folder.</p><span class="dtag">departure</span></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">11</span><h2>Travel gallery — the Armenian half</h2></div>
+      <p class="lead">What the second week actually looks like. The Georgian photographs are on the <b>Georgia</b> tab; these are Armenia. The badge is the month each photo was taken (<b>November marked in colour</b>). <b>Click any photo</b> to open it full-screen and swipe through.</p>
+      <div class="gal">
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Khor Virap &amp; Ararat"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg/960px-Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg/1920px-Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg" alt="Khor Virap &amp; Ararat" title="Diego Delso · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Oct 2016</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Khor Virap &amp; Ararat</b><p>The monastery alone on the plain beneath the mountain.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Ararat over Yerevan"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mount_Ararat_and_the_Yerevan_skyline.jpg/960px-Mount_Ararat_and_the_Yerevan_skyline.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Mount_Ararat_and_the_Yerevan_skyline.jpg/1920px-Mount_Ararat_and_the_Yerevan_skyline.jpg" alt="Ararat over Yerevan" title="Serouj Ourishian · CC BY-SA 3.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when nov">Nov 2016</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Ararat over Yerevan</b><p>The mountain closing the end of the city, in November.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: The Cascade"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg/960px-Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg/1920px-Yerevan%2C_Cascade_of_Yerevan%2C_Armenia.jpg" alt="The Cascade" title="Vyacheslav Argenberg · CC BY 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>The Cascade</b><p>Yerevan's great stone staircase of sculpture terraces.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Republic Square"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Republic_Square_Metro_Station_Fountains_in_Yerevan_2019-06-20v2.jpg/960px-Republic_Square_Metro_Station_Fountains_in_Yerevan_2019-06-20v2.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Republic_Square_Metro_Station_Fountains_in_Yerevan_2019-06-20v2.jpg/1920px-Republic_Square_Metro_Station_Fountains_in_Yerevan_2019-06-20v2.jpg" alt="Republic Square" title="Armenak Margarian · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Jun 2019</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Republic Square</b><p>Tuff-stone facades around the singing fountains.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Vernissage market"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Vernissage_market%2C_Yerevan.jpg/960px-Vernissage_market%2C_Yerevan.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Vernissage_market%2C_Yerevan.jpg/1920px-Vernissage_market%2C_Yerevan.jpg" alt="Vernissage market" title="Deb Collins · CC BY 2.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Vernissage market</b><p>Silver, carpets, carved wood and Soviet bric-a-brac.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Geghard Monastery"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg/960px-2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg/1920px-2014_Prowincja_Kotajk%2C_Klasztor_Geghard_%2802%29.jpg" alt="Geghard Monastery" title="Marcin Konsek · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">2014</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Geghard Monastery</b><p>Half of it carved straight into the cliff face.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Garni Temple"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Garni_Temple_18-11-2010_v2.jpg/960px-Garni_Temple_18-11-2010_v2.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Garni_Temple_18-11-2010_v2.jpg/1920px-Garni_Temple_18-11-2010_v2.jpg" alt="Garni Temple" title="Armenak Margarian · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when nov">Nov 2010</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Garni Temple</b><p>A Greco-Roman colonnade on the gorge edge, in November.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Noravank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Monasterio_Noravank%2C_Armenia%2C_2016-10-01%2C_DD_28.jpg/960px-Monasterio_Noravank%2C_Armenia%2C_2016-10-01%2C_DD_28.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Monasterio_Noravank%2C_Armenia%2C_2016-10-01%2C_DD_28.jpg/1920px-Monasterio_Noravank%2C_Armenia%2C_2016-10-01%2C_DD_28.jpg" alt="Noravank" title="Diego Delso · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Oct 2016</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Noravank</b><p>Rose-red church against rose-red cliffs.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Sevanavank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Sevanavank_on_1.09.23%2C_36.jpg/960px-Sevanavank_on_1.09.23%2C_36.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Sevanavank_on_1.09.23%2C_36.jpg/1920px-Sevanavank_on_1.09.23%2C_36.jpg" alt="Sevanavank" title="Anastasiya Lvova · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Sep 2023</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Sevanavank</b><p>The 9th-century monastery above Lake Sevan.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Haghpat"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Haghpat_Monastery2.jpg/960px-Haghpat_Monastery2.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Haghpat_Monastery2.jpg/1920px-Haghpat_Monastery2.jpg" alt="Haghpat" title="Saro Hovhannisyan · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Haghpat</b><p>UNESCO-listed, ten minutes off the road from the border.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Sanahin"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Monasterio_de_Sanahin%2C_Armenia%2C_2016-09-30%2C_DD_44-46_HDR.jpg/960px-Monasterio_de_Sanahin%2C_Armenia%2C_2016-09-30%2C_DD_44-46_HDR.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Monasterio_de_Sanahin%2C_Armenia%2C_2016-09-30%2C_DD_44-46_HDR.jpg/1920px-Monasterio_de_Sanahin%2C_Armenia%2C_2016-09-30%2C_DD_44-46_HDR.jpg" alt="Sanahin" title="Diego Delso · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Sep 2016</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Sanahin</b><p>Its twin, across the Debed canyon.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Dilijan"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Armenia._Dilijan_P8230682_2350.jpg/960px-Armenia._Dilijan_P8230682_2350.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Armenia._Dilijan_P8230682_2350.jpg/1920px-Armenia._Dilijan_P8230682_2350.jpg" alt="Dilijan" title="Alexxx1979 · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Aug 2019</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Dilijan</b><p>Wooden balconies in the forested "little Switzerland".</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Areni-1 cave"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Areni-1_cave_entrance.jpg/960px-Areni-1_cave_entrance.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Areni-1_cave_entrance.jpg/1920px-Areni-1_cave_entrance.jpg" alt="Areni-1 cave" title="Serouj · CC BY 3.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Jan 2011</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Areni-1 cave</b><p>Where the world's oldest winery was found — 6,100 years.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Areni winery"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Areni%2C_wine_factory_%281%29.jpg/960px-Areni%2C_wine_factory_%281%29.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Areni%2C_wine_factory_%281%29.jpg/1920px-Areni%2C_wine_factory_%281%29.jpg" alt="Areni winery" title="Palickap · CC BY 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Areni today</b><p>Still making wine a few hundred metres from the cave.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Yerevan in winter"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Winter_park%2C_Yerevan_%282%29.jpg/960px-Winter_park%2C_Yerevan_%282%29.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Winter_park%2C_Yerevan_%282%29.jpg/1920px-Winter_park%2C_Yerevan_%282%29.jpg" alt="Yerevan in winter" title="Armineaghayan · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Jan 2019</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Yerevan in winter</b><p>Bare trees and low sun in the city parks.</p></figcaption></figure>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">12</span><h2>Must-try — the Armenian table</h2></div>
+      <p class="lead">Gentler and herbier than Georgian food, and easier on a vegetarian than you'd expect once you find the vegetable dolma and the summer-preserve cooking. The Georgian dishes are on the <b>Georgia</b> tab.</p>
+      <div class="food">
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/Lavash_arm%C3%A9nien.jpg/960px-Lavash_arm%C3%A9nien.jpg" alt="Lavash" onerror="this.style.display='none'"><div class="db"><b>Lavash</b><p>Paper-thin bread slapped onto the wall of a clay tonir. UNESCO-listed, and worth watching being made.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Khorovats_in_Sevan.jpg/960px-Khorovats_in_Sevan.jpg" alt="Khorovats" onerror="this.style.display='none'"><div class="db"><b>Khorovats</b><p>The national barbecue — pork or lamb over vine cuttings, with grilled vegetables smoked alongside.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Armenian_Dolma_with_grape_leaves.jpg/960px-Armenian_Dolma_with_grape_leaves.jpg" alt="Dolma" onerror="this.style.display='none'"><div class="db"><b>Tolma</b><p>Vine leaves rolled around rice and herbs; the meatless <em>pasuts</em> version is the vegetarian hero.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Gata_%28p%C3%A2tisserie%29.jpg/960px-Gata_%28p%C3%A2tisserie%29.jpg" alt="Gata" onerror="this.style.display='none'"><div class="db"><b>Gata</b><p>Sweet layered pastry sold at every monastery gate — buy it warm at Geghard.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Fruit_Drying_in_Armenia_02.jpg/960px-Fruit_Drying_in_Armenia_02.jpg" alt="Dried fruit" onerror="this.style.display='none'"><div class="db"><b>Apricots &amp; dried fruit</b><p>The apricot is practically the national symbol. In November it's the dried-fruit and walnut stalls that take over the markets.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c0/Areni%2C_wine_factory_%281%29.jpg/960px-Areni%2C_wine_factory_%281%29.jpg" alt="Areni wine" onerror="this.style.display='none'"><div class="db"><b>Areni wine &amp; brandy</b><p>Indigenous Areni noir from the oldest winemaking region on earth — and the brandy Churchill is said to have kept ordering.</p></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">13</span><h2>Getting around</h2></div>
+      <p class="lead">Self-drive in Georgia, drivers in Armenia. The one rule that matters: <b>do not plan to take a Georgian rental car across the border</b> — most agreements forbid it outright, and the ones that don't need paperwork arranged days in advance.</p>
+      <div class="card"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">The honest verdict</h3>
+        <ul>
+          <li><b>Georgia, days 1–8:</b> a compact self-drive is genuinely pleasant for Tbilisi, Mtskheta and Kakheti — flat, well-signed, and Sheldon rides with you. Take a <b>private driver for the Kazbegi day</b>; the Military Road in snow is not the place to learn.</li>
+          <li><b>The border, day 9:</b> a dedicated Tbilisi–Yerevan transfer, <b>$120–180</b>. Ask specifically for a driver who has taken pets across before.</li>
+          <li><b>Armenia, days 10–15:</b> don't rent. Yerevan is walkable and taxis are very cheap through <b>Yandex Go</b> or <b>GG</b>; the day trips to Geghard, Garni, Khor Virap and Noravank are best as a hired car and driver at roughly <b>$60–90</b> a day, which is barely more than a rental once you add winter roads.</li>
+          <li><b>Paperwork if you do rent in Georgia:</b> an International Driving Permit with your licence, booked online 2–3 days ahead. Airport walk-up rates run 30–50% higher.</li>
+        </ul>
+      </div></div>
+      <div class="tbl-wrap" style="margin-top:14px"><table>
+        <thead><tr><th>Leg</th><th>Typical price</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Georgia compact self-drive, 5–6 days</td><td class="num">$25–45/day</td><td>Tbilisi, Mtskheta, Kakheti with Sheldon aboard</td></tr>
+          <tr><td class="trail">Private driver, Kazbegi day</td><td class="num">$60–90</td><td>The Military Road in snow, no stress</td></tr>
+          <tr><td class="trail">Tbilisi → Yerevan transfer</td><td class="num">$120–180</td><td>The border crossing, with the vet window handled</td></tr>
+          <tr><td class="trail">Armenia car + driver, per day</td><td class="num">$60–90</td><td>Geghard/Garni, Khor Virap/Noravank</td></tr>
+          <tr><td class="trail">Yerevan taxis (Yandex Go / GG)</td><td class="num">$1.50–4/ride</td><td>Everything inside the city</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">14</span><h2>What it costs — 2 people + Sheldon, 15 days</h2></div>
+      <p class="lead">Mid-range estimate in USD (₹ at ~₹88/$). Both countries are inexpensive on the ground; the open-jaw ticket is the swing factor.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Detail</th><th class="num">USD</th></tr></thead>
+        <tbody>
+          <tr class="sub"><td colspan="3">Before you fly — Sheldon paperwork (India / AQCS)</td></tr>
+          <tr><td>Microchip + rabies + parasite treatment</td><td>vet, if not already done</td><td class="num">$40–70</td></tr>
+          <tr><td>Vet health certificate</td><td>accredited vet</td><td class="num">$25–50</td></tr>
+          <tr><td>AQCS export exam + NOC</td><td>Bangalore, ~1 wk ahead</td><td class="num">$25–60</td></tr>
+          <tr><td>Pet relocation agent (optional)</td><td>handles AQCS + airline docs</td><td class="num">$150–350</td></tr>
+          <tr class="sub"><td colspan="3">Getting there</td></tr>
+          <tr><td>Flights ×2, open-jaw</td><td>BLR → TBS · EVN → BLR, Turkish</td><td class="num">$1,000–1,600</td></tr>
+          <tr><td>Sheldon in-cabin, both directions</td><td>Turkish pet fee, ~€100–150/leg</td><td class="num">$250–450</td></tr>
+          <tr><td>Puneet's Armenian e-visa</td><td>evisa.mfa.am, 21 days</td><td class="num">$8–12</td></tr>
+          <tr class="sub"><td colspan="3">On the ground (15 days)</td></tr>
+          <tr><td>Stays ×14 nights</td><td>$45–80/night, apartments &amp; guesthouses</td><td class="num">$700–1,120</td></tr>
+          <tr><td>Food &amp; wine, 2 pax</td><td>restaurants daily, both countries</td><td class="num">$500–780</td></tr>
+          <tr><td>Georgia car + Kazbegi driver</td><td>compact self-drive + 1 driver day</td><td class="num">$220–370</td></tr>
+          <tr><td>Tbilisi → Yerevan border transfer</td><td>private car, 4–5 hrs</td><td class="num">$120–180</td></tr>
+          <tr><td>Armenia drivers &amp; day trips</td><td>3 days with a car and driver</td><td class="num">$200–320</td></tr>
+          <tr><td>Taxis, tastings, entries, lifts</td><td>both countries</td><td class="num">$150–280</td></tr>
+          <tr><td>Travel + accident insurance ×2</td><td>Georgia's 2026 rule, 15 days, + pet cover</td><td class="num">$150–260</td></tr>
+          <tr class="sub"><td colspan="3">After you return — Sheldon home (India / AQCS)</td></tr>
+          <tr><td>Georgian vet certificate (for the border)</td><td>Tbilisi, day 8</td><td class="num">$25–50</td></tr>
+          <tr><td>Armenian vet certificate (for the flight)</td><td>Yerevan, day 14</td><td class="num">$25–50</td></tr>
+          <tr><td>Re-import Advance NOC + exam</td><td>AQCS Bangalore</td><td class="num">$25–60</td></tr>
+          <tr class="total"><td>Estimated total</td><td>two people + Sheldon, 15 days, all-in</td><td class="num">$3,700–6,200</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>Reading it:</b> roughly <b>₹3.3–5.5 lakh</b> for the whole trip — about <b>₹70,000–1.3 lakh</b> more than the 11-day single-country version, for four extra days and a second country. The lower end assumes a good fare and no relocation agent; the upper end is the comfortable, agent-assisted version.</div>
+    </section>
+
+    <div class="foot">
+      <p><b>Verify before booking.</b> Pet-import and border-veterinary rules (Georgia's National Food Agency, Armenia's food-safety inspectorate, India's AQCS and Customs), visa policy, insurance requirements and airline pet allowances all change and are enforced at official discretion. Confirm current specifics — especially Sheldon's cabin slots and the border health certificate — before committing money. A planning starting point, not official clearance.</p>
+      <p class="credit">Photos: Wikimedia Commons (CC-licensed); photographers &amp; licences are in each image tooltip. For Puneet &amp; Rachel · Sheldon, toy poodle · Bengaluru ⇄ Sakartvelo ⇄ Hayastan.</p>
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- ===========   GEORGIA + AZERBAIJAN   ================== -->
+  <!-- ======================================================= -->
+  <div class="country" id="georgia-azerbaijan">
+    <header class="masthead">
+      <div class="eyebrow">Pet-travel &amp; trip dossier · Rachel's 40th · 15 days, 18 Nov – 2 Dec 2026</div>
+      <h1>Georgia + Azerbaijan</h1>
+      <div class="geo">საქართველო · Azərbaycan — mountains, then the Caspian</div>
+      <div class="sub">The warmer, stranger two-country trip. Eight days of Georgian snow and wine, then a one-hour flight east to <b>Baku</b> — a walled medieval core wrapped in flame-shaped towers, with fire coming out of the ground an hour up the road. Milder than Armenia by a good five degrees, at the price of one extra flight for Sheldon.</div>
+      <img class="hero-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1280px-Flame_towers_from_Baku_boulevard.JPG" alt="Flame Towers from Baku Boulevard" onerror="this.style.display='none'">
+      <div class="stamp"><b>SHELDON&nbsp;OK</b><span>NO TITRE · ONE SHORT HOP</span></div>
+    </header>
+
+    <section><div class="sec-head"><span class="sec-num">01</span><h2>Why this combination works</h2></div>
+      <p class="lead">You said the second country needn't be cold, but should be memorable. This is the pairing that answers that — Baku is the mildest place within reach on these dates and the least like Georgia of anything nearby. It costs you one extra flight, and that is the whole trade.</p>
+      <div class="pairstat">
+        <div><b>Border crossing</b><span>1-hour flight</span></div>
+        <div><b>Extra flights for Sheldon</b><span>One, in cabin</span></div>
+        <div><b>Rabies titre test</b><span>Not required</span></div>
+        <div><b>The split</b><span>8 days + 7 days</span></div>
+      </div>
+      <div class="why">
+        <ul>
+          <li><b>The sharpest contrast you can get in two weeks.</b> Georgia is Orthodox, alpine and wine-soaked. Baku is a Caspian oil city on a desert peninsula — a UNESCO-listed walled town of hammams and caravanserais, ringed by glass towers, with Zoroastrian fire temples and bubbling grey mud volcanoes on its doorstep. Nothing about week two will feel like week one.</li>
+          <li><b>It's genuinely warmer.</b> Baku runs about <b>10–14 °C</b> in late November against Yerevan's near-freezing. Sea-level, no mountain passes, no snow chains — the gentler week for a small dog after eight days in the Caucasus.</li>
+          <li><b>No titre test, no 90-day clock.</b> Azerbaijan asks for the microchip, a current rabies shot, a health certificate, and one thing Armenia doesn't: <b>tapeworm treatment</b>. All achievable inside your timeline, unlike Turkey.</li>
+          <li><b>Still one airline home.</b> Turkish serves Baku, so the ticket stays an open-jaw on a single carrier — into Tbilisi, out of Baku, Sheldon in the cabin on both long legs.</li>
+          <li><b>Fifteen days splits the same way.</b> Eight days in Georgia with <b>Rachel's 40th on 23 November</b> landing on day six in Tbilisi, then a short flight, then seven unhurried days on the Caspian.</li>
+        </ul>
+      </div>
+      <div class="note"><b>The honest cost, stated plainly:</b> Azerbaijan closed its land borders to incoming travellers in 2020 and they remain shut, so you <em>cannot</em> drive across from Georgia the way you can into Armenia. That means a second airline, a second pet slot to reserve, and a second chance for something to go wrong at a gate. If lowest-risk logistics matter more than warmth, the <b>Georgia + Armenia</b> tab is the easier trip.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">02</span><h2>Taking Sheldon — what happens in India</h2></div>
+      <p class="lead">Identical to every other version of this trip, because Georgia is still where he lands. All of it happens in Bangalore before you fly, and the originals you collect are what get him home again.</p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · India</div><h3>ISO microchip</h3><p>15-digit ISO 11784/11785 chip, implanted <b>before</b> the rabies vaccination, with the same number on every document that follows.</p></div>
+        <div class="step"><div class="k">Step 2 · India</div><h3>Rabies vaccination</h3><p>Georgia wants 30 days before arrival; Azerbaijan wants it between 30 days and 12 months old; Turkish Airlines wants 30 days. All satisfied by one date: shot done by about <b>23 October 2026</b>.</p><span class="tagpill">the one date that governs everything</span></div>
+        <div class="step"><div class="k">Step 3 · India</div><h3>Parasite &amp; tapeworm treatment</h3><p>Deworming plus tick and flea treatment — and make sure the vet records <b>Taenia echinococcus</b> treatment specifically, because Azerbaijan asks for proof of it and Georgia does not.</p></div>
+        <div class="step"><div class="k">Step 4 · India</div><h3>AQCS Bangalore export certificate + NOC</h3><p>Book about a week ahead, present Sheldon ~7 days before departure; the certificate is valid 10 days. <b>Keep every original</b> — they're what avoid quarantine on the way home.</p></div>
+        <div class="step"><div class="k">Step 5 · Tbilisi</div><h3>Arrival in Georgia</h3><p>Chip scanned, documents checked. No titre, no quarantine when compliant.</p></div>
+      </div>
+      <div class="note"><b>File this early:</b> you now fly home from <b>Baku</b>, so the AQCS <b>Advance NOC</b> for re-import must be applied for at least <b>7 working days</b> before the 2 December flight — around day 5, from Georgia. Begin it before you leave India if you can.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">03</span><h2>Crossing into Azerbaijan with Sheldon</h2></div>
+      <p class="lead">The important thing first: <b>the land border is closed to entry.</b> Azerbaijan shut its land crossings in 2020 and has kept them shut — foreigners may leave overland but not arrive. So this leg is a flight, and Sheldon needs a seat on it.</p>
+      <div class="pipe">
+        <div class="step"><div class="k">Step 1 · Before you fly out</div><h3>Book Sheldon onto the AZAL flight</h3><p>Azerbaijan Airlines takes pets in the cabin at <b>8 kg including the carrier</b>, container within 40 × 30 × 20 cm. It must be requested and confirmed by phone with reservations, <b>at least 24 hours ahead</b> — do it when you book the tickets, not at the airport. Roughly <b>€50</b> on regional routes.</p><span class="tagpill">reserve this before anything else in week two</span></div>
+        <div class="step"><div class="k">Step 2 · Tbilisi, day 8</div><h3>Get a Georgian vet health certificate</h3><p>A health certificate for non-commercial movement from a Tbilisi vet, dated within <b>10 days</b> of travel. Bring Sheldon's chip number, rabies record and your passport. Confirm the tapeworm treatment is written on it.</p></div>
+        <div class="step"><div class="k">Step 3 · The flight</div><h3>Tbilisi → Baku, about an hour</h3><p>A short hop east. Sheldon stays in his carrier under the seat; the same soft bag you used on Turkish works if it fits AZAL's slightly tighter box.</p></div>
+        <div class="step"><div class="k">Step 4 · Baku</div><h3>Arrival at Heydar Aliyev airport</h3><p>Documents and microchip checked at the veterinary desk. No titre test, no import permit for a pet travelling with its owner, no quarantine when the paperwork is in order. Note that e-visa holders must enter <b>by air</b> — which this does.</p></div>
+        <div class="step"><div class="k">Step 5 · Baku, day 14</div><h3>An Azerbaijani vet certificate for the flight home</h3><p>The long leg home starts in Baku, so the fresh certificate comes from an <b>Azerbaijani</b> vet, dated close to departure. Book it two days out.</p></div>
+        <div class="step home"><div class="k">Step 6 · Return</div><h3>Bringing Sheldon home to India</h3><p>With the <b>AQCS Advance NOC</b> already filed under <b>Re-import</b> (Customs Circular 25/2013) against your original Bangalore export documents, he skips the 15-day quarantine that fresh imports face.</p></div>
+      </div>
+      <div class="note"><b>What you're carrying, in one line:</b> microchip certificate · Indian rabies record with tapeworm treatment noted · AQCS export certificate and NOC (originals) · a Georgian health certificate under 10 days old · AZAL's written pet confirmation · and later, an Azerbaijani certificate for the way home.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">04</span><h2>Getting there — the flights</h2></div>
+      <p class="lead">Three flights with Sheldon aboard rather than two. The two long ones are Turkish, open-jaw; the short middle one is AZAL.</p>
+      <div class="flights">
+        <div class="fl best">
+          <div class="fl-top"><h3>Turkish Airlines, open-jaw</h3><span class="verdict">Book this</span></div>
+          <div class="route">BLR → IST → TBS &nbsp;·&nbsp; GYD → IST → BLR &nbsp;·&nbsp; one ticket</div>
+          <p>Turkish flies to both Tbilisi and Baku via Istanbul, so a multi-city booking gets you in one end and out the other with Sheldon in the cabin, and nothing retraced.</p>
+          <ul>
+            <li><b>8 kg including the carrier</b>, <b>economy only</b>, <b>soft carrier</b> to 40 × 30 × 23 cm.</li>
+            <li><b>Reserve both pet slots at booking</b> — outbound and return have separate limits.</li>
+            <li><b>Transit Istanbul, never enter it.</b> Airside on one airline means Turkey's titre rule never touches you; clear immigration for a stopover and it would.</li>
+          </ul>
+          <span class="cabin">In-cabin pet fee ≈ €100–150 per leg</span>
+        </div>
+        <div class="fl alt">
+          <div class="fl-top"><h3>AZAL — the middle hop</h3><span class="verdict">The extra leg</span></div>
+          <div class="route">TBS → GYD · ~1 hour</div>
+          <p>Azerbaijan Airlines is the practical carrier for Tbilisi–Baku and takes pets in the cabin: 8 kg with carrier, container to 40 × 30 × 20 cm, <b>confirmed by phone at least 24 hours ahead</b>. Around <b>€50</b>. Book this the same day you book the Turkish ticket — it is the single scarcest thing in the whole itinerary.</p>
+        </div>
+        <div class="fl no">
+          <div class="fl-top"><h3>Driving across</h3><span class="verdict">Not possible</span></div>
+          <div class="route">Red Bridge · Lagodekhi–Balakan</div>
+          <p>Both crossings exist and both are shut to <b>incoming</b> foreign travellers, closed since 2020. You may exit Azerbaijan overland but not enter. This is the one hard difference between this tab and the Armenia one.</p>
+        </div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">05</span><h2>Visas — two countries, two passports</h2></div>
+      <p class="lead">More filing than the Armenia version: Azerbaijan wants an e-visa from <em>both</em> of you. It's online, cheap and quick, but it is a real step.</p>
+      <div class="visa">
+        <div class="vcard"><div class="flag">Rachel · US passport · Georgia</div><h3>Visa-free, up to 1 year</h3><span class="vp">No application</span><p>Arrive with a passport valid 6+ months.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport · Georgia</div><h3>e-Visa — or visa-free with a US/UK/Schengen visa</h3><span class="vp step">One online step</span><p>A valid <b>US, UK or Schengen visa or residence permit</b> makes it visa-free; otherwise <b>evisa.gov.ge</b> (~$20, ~5 business days).</p></div>
+        <div class="vcard in"><div class="flag">Rachel · US passport · Azerbaijan</div><h3>ASAN e-Visa, 30 days</h3><span class="vp step">One online step</span><p>US citizens need an e-visa — there's no visa-free entry. Apply at <b>evisa.gov.az</b>, about <b>$29</b>, roughly 3 working days (a 3-hour urgent option exists). Air entry only.</p></div>
+        <div class="vcard in"><div class="flag">Puneet · Indian passport · Azerbaijan</div><h3>ASAN e-Visa, 30 days</h3><span class="vp step">One online step</span><p>Same system, same price, same timing. No visa on arrival for Indian passports, so this must be done before you leave.</p></div>
+      </div>
+      <div class="note"><b>Two things to know.</b> Georgia's 2026 rule requires health and accident cover of at least 30,000 GEL — buy one policy covering both countries and all 15 days. And Azerbaijan requires registration with the State Migration Service for stays beyond 15 days; at seven days you're comfortably clear.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">06</span><h2>Geopolitical stability — an honest read</h2></div>
+      <p class="lead">Neither country is a party to the Middle East war, though Azerbaijan — like Armenia — shares a border with Iran. Both scores land in the same place as the Armenia pairing, for different reasons.</p>
+      <div class="geoscore">
+        <div class="gs-num"><b>7.0<i>/10</i></b><span>Georgia</span></div>
+        <div class="gs-verdict"><b>Go — with your eyes open</b>
+          <p>Safe to walk around; the instability is political theatre on one Tbilisi avenue, plus occupied regions you never approach.</p></div>
+      </div>
+      <div class="bars">
+        <div class="bar"><span class="bl">Distance from the Middle East war</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · no involvement</span></div>
+        <div class="bar warn"><span class="bl">Domestic political stability</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · recurring protests</span></div>
+        <div class="bar warn"><span class="bl">Russia &amp; frozen-conflict exposure</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · occupied regions</span></div>
+        <div class="bar"><span class="bl">Everyday safety &amp; crime</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · very low risk</span></div>
+        <div class="bar warn"><span class="bl">Flight-route exposure</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · fine via Istanbul</span></div>
+      </div>
+      <div class="geoscore" style="margin-top:18px">
+        <div class="gs-num"><b>6.8<i>/10</i></b><span>Azerbaijan</span></div>
+        <div class="gs-verdict"><b>Go — Baku is calm and very safe</b>
+          <p>Low crime, heavy state presence, tourists barely register. The caveats are regional and political rather than anything you'd feel on the Boulevard.</p></div>
+      </div>
+      <div class="bars">
+        <div class="bar warn"><span class="bl">Distance from the Middle East war</span><span class="bt"><i style="width:60%"></i></span><span class="bv">6 · borders Iran</span></div>
+        <div class="bar"><span class="bl">Domestic political stability</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · firmly stable</span></div>
+        <div class="bar risk"><span class="bl">Regional tension with Armenia</span><span class="bt"><i style="width:50%"></i></span><span class="bv">5 · avoid the frontier</span></div>
+        <div class="bar"><span class="bl">Everyday safety &amp; crime</span><span class="bt"><i style="width:90%"></i></span><span class="bv">9 · very low risk</span></div>
+        <div class="bar warn"><span class="bl">Flight-route exposure</span><span class="bt"><i style="width:70%"></i></span><span class="bv">7 · fine via Istanbul</span></div>
+      </div>
+      <div class="card" style="margin-top:16px"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">What this means in practice</h3>
+        <ul>
+          <li><b>The Middle East war:</b> neither country is involved. Azerbaijan's southern border with Iran is worth knowing about and has produced no traveller-facing spillover. The practical effect stays <b>aviation</b>, which Istanbul routing handles.</li>
+          <li><b>Baku itself:</b> genuinely one of the safer capitals you could pick — very low street crime, and a visible police presence. Ordinary caution in crowds and with unlicensed taxis is the whole of it.</li>
+          <li><b>The Armenian frontier and Karabakh:</b> off-limits and far from anything here. Everything in this itinerary sits on the Caspian side of the country.</li>
+          <li><b>One planning consequence:</b> Azerbaijan can refuse entry to travellers who have visited Nagorno-Karabakh, and the two countries' relationship remains cold. Practically, that means <b>you cannot combine this tab with the Armenia tab</b> — pick one second country, not both.</li>
+          <li><b>Photography and drones:</b> avoid photographing government buildings, border installations and military sites, and leave drones at home; rules are enforced more strictly here than in Georgia.</li>
+        </ul>
+      </div></div>
+      <div class="note"><b>How to read these scores:</b> our composite judgement across the five factors, weighted for <em>two tourists and a small dog on a two-week trip</em>. Not an official index. Re-check a month before you fly.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">07</span><h2>Late-November weather</h2></div>
+      <p class="lead">The reason this pairing exists. Baku sits at sea level on the Caspian and stays mild well into December — grey and windy more often than cold, and a soft landing after the Georgian mountains.</p>
+      <div class="weather">
+        <div class="wx"><div class="place">Tbilisi</div><div class="temp">8–12°C day</div><div class="note">Mild, sometimes grey. Old town, baths, wine bars.</div></div>
+        <div class="wx"><div class="place">Kazbegi</div><div class="temp">−5 to +5°C</div><div class="note">Early winter, snowy peaks. Gergeti needs winter shoes.</div></div>
+        <div class="wx"><div class="place">Baku</div><div class="temp">10–14°C day</div><div class="note">Mild and windy off the Caspian. Coat, not thermals.</div></div>
+        <div class="wx"><div class="place">Gobustan / Absheron</div><div class="temp">9–14°C, dry</div><div class="note">Semi-desert, big skies. Very exposed wind.</div></div>
+      </div>
+      <div class="note"><b>Pack for the wind, not the cold.</b> Baku is nicknamed the city of winds, and the Caspian gusts make 12 °C feel considerably sharper on the Boulevard. A proper windproof layer matters more than a thick one — and Sheldon will want his coat out on the mud-volcano plateau.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">08</span><h2>Georgia — the eight days</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Old_Town%2C_Tbilisi%2C_Georgia_%2848808779832%29.jpg/1280px-Old_Town%2C_Tbilisi%2C_Georgia_%2848808779832%29.jpg" alt="Old Tbilisi" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · 4 nights across the leg</div><h3>Old Tbilisi</h3><p>Carved wooden balconies under Narikala, the domed <b>sulphur bathhouses</b> of Abanotubani, natural-wine bars and the Dry Bridge flea market. Walkable, dog-tolerant, and the right setting for a 40th dinner.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Kazbegi%2C_Gergeti_Trinity_Church_and_Mt_Kazbek_%2835959311351%29.jpg/1280px-Kazbegi%2C_Gergeti_Trinity_Church_and_Mt_Kazbek_%2835959311351%29.jpg" alt="Kazbegi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · the drama</div><h3>Military Road → Kazbegi</h3><p>Ananuri fortress on its reservoir, the Gudauri viewpoint, then Stepantsminda where <b>Gergeti Trinity</b> stands alone under 5,047 m Mt Kazbek.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Sighnaghi%2C_Georgia.jpg/1280px-Sighnaghi%2C_Georgia.jpg" alt="Sighnaghi" onerror="this.style.display='none'"><div class="pad"><div class="k">2 nights · wine country</div><h3>Kakheti &amp; Sighnaghi</h3><p>A walled hilltop town over the Alazani valley. Family <b>qvevri wineries</b> pour amber wine from buried clay; Bodbe convent sits among cypresses.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Mtskheta%2C_Jvari_Monastery%2C_Church%2C_Georgia.jpg/1280px-Mtskheta%2C_Jvari_Monastery%2C_Church%2C_Georgia.jpg" alt="Jvari Monastery" onerror="this.style.display='none'"><div class="pad"><div class="k">Half day · 40 min out</div><h3>Mtskheta</h3><p>The old spiritual capital: hilltop <b>Jvari Monastery</b> above two rivers, and 11th-century Svetitskhoveli below.</p></div></div>
+      </div>
+      <div class="note">The full Georgian detail — trails, driving, food, the longer list of towns — is on the <b>Georgia</b> tab. This leg is that trip trimmed to its strongest eight days.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">09</span><h2>Azerbaijan — the seven days</h2></div>
+      <div class="grid2">
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_004_8407.jpg/1280px-Baku_IcheriSheher_004_8407.jpg" alt="Icherisheher, Baku old city" onerror="this.style.display='none'"><div class="pad"><div class="k">Base · 6 nights</div><h3>Icherisheher, the walled city</h3><p>A UNESCO-listed medieval core still inside its walls: the 12th-century <b>Maiden Tower</b>, the Shirvanshahs' Palace, caravanserais now serving tea, and lanes narrow enough to lose an afternoon in. Step outside the gate and you're on the <b>Boulevard</b>, a long Caspian seafront promenade — flat, breezy and made for walking a dog.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Gobustan_mud_volcanoes_01.jpg/1280px-Gobustan_mud_volcanoes_01.jpg" alt="Gobustan mud volcanoes" onerror="this.style.display='none'"><div class="pad"><div class="k">Day trip · 1 hr south</div><h3>Gobustan rock art &amp; mud volcanoes</h3><p>Thousands of <b>petroglyphs</b> carved into the rocks over 40,000 years — dancers, boats, aurochs — on a UNESCO-listed hillside above the sea. Then a rutted track to a plateau of <b>mud volcanoes</b> quietly burping cold grey mud. Azerbaijan has more of them than any country on earth. Genuinely strange, and utterly memorable.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg/1280px-Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg" alt="Yanar Dag" onerror="this.style.display='none'"><div class="pad"><div class="k">Half day · the Absheron</div><h3>Fire — Ateshgah &amp; Yanar Dag</h3><p>This is the "land of fire" literally. <b>Ateshgah</b> is a pentagonal fire temple where Zoroastrian and Hindu ascetics tended flames fed by natural gas seeps. <b>Yanar Dag</b> is a hillside that has simply been burning, continuously, for centuries. Best at dusk, and it photographs like nowhere else.</p></div></div>
+        <div class="card"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Heydar_Aliyev_Cultural_Center_park.jpg/1280px-Heydar_Aliyev_Cultural_Center_park.jpg" alt="Heydar Aliyev Center" onerror="this.style.display='none'"><div class="pad"><div class="k">Afternoon · modern Baku</div><h3>Zaha Hadid's white wave</h3><p>The <b>Heydar Aliyev Center</b> is one of the most photographed buildings of the century — a single poured curve with no straight lines in it, in a park you can walk around freely. Pair it with the <b>Carpet Museum</b>, built in the shape of a rolled rug, and the Flame Towers lit up after dark.</p></div></div>
+      </div>
+      <div class="note"><b>If you want a village too:</b> <b>Sheki</b>, five hours inland, has the extraordinary 18th-century <b>Khan's Palace</b> — stained-glass <em>shebeke</em> lattices assembled without nails or glue — plus caravanserais and mountain air. It only works as an overnight, not a day trip. Swap it in for the slow Baku day if you'd rather have it.</div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">10</span><h2>The 15-day plan, day by day</h2></div>
+      <p class="lead">Same fixed point: <b>Rachel's 40th on 23 November</b>, day six, in Tbilisi — mountains behind you, baths open, no driving.</p>
+      <div class="itin">
+        <div class="day base"><div class="dn"><b>1</b><span>18 Nov · Tbilisi</span></div><div class="dc"><h3>Land &amp; settle in the old town</h3><p>Arrive, collect Sheldon, into an old-town apartment. A gentle wander through Abanotubani; first khinkali, first amber wine.</p><span class="dtag">arrival · easy</span></div></div>
+        <div class="day base"><div class="dn"><b>2</b><span>19 Nov · Tbilisi</span></div><div class="dc"><h3>Old Tbilisi on foot</h3><p>Narikala by cable car, the sulphur baths, the Dry Bridge market, Fabrika. Long lunch, wine bars at dusk.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day base"><div class="dn"><b>3</b><span>20 Nov · Mtskheta</span></div><div class="dc"><h3>Day trip to the old capital</h3><p>Jvari Monastery above the two rivers and Svetitskhoveli cathedral, back for a supra in the evening.</p><span class="dtag">day trip · 40 min</span></div></div>
+        <div class="day"><div class="dn"><b>4</b><span>21 Nov · → Kazbegi</span></div><div class="dc"><h3>The Georgian Military Road north</h3><p>Driver for the day: Ananuri, the Gudauri viewpoint, then Stepantsminda and a guesthouse under Kazbek.</p><span class="dtag">transfer · scenic</span></div></div>
+        <div class="day"><div class="dn"><b>5</b><span>22 Nov · Kazbegi</span></div><div class="dc"><h3>Gergeti &amp; the mountains</h3><p>Up to Gergeti Trinity, then the level Truso Valley walk. Back to Tbilisi late afternoon. <em>File the AQCS Advance NOC today.</em></p><span class="dtag">nature · snow</span></div></div>
+        <div class="day base"><div class="dn"><b>6</b><span>23 Nov · Tbilisi</span></div><div class="dc"><h3>Rachel's 40th — unhurried, no driving</h3><p>Slow morning, Turtle Lake or Mtatsminda for the view, a long soak in a private sulphur hammam, then dinner at the best table in Tbilisi and a toast with something eight thousand years old.</p><span class="dtag">the 40th 🎂</span></div></div>
+        <div class="day"><div class="dn"><b>7</b><span>24 Nov · → Kakheti</span></div><div class="dc"><h3>Into wine country</h3><p>East to Sighnaghi. A small guesthouse, and sunset over the Alazani valley.</p><span class="dtag">wine · quaint</span></div></div>
+        <div class="day"><div class="dn"><b>8</b><span>25 Nov · Kakheti → Tbilisi</span></div><div class="dc"><h3>Qvevri cellars, then back to town</h3><p>Family wineries, Bodbe convent, a long Kakhetian lunch. Back to Tbilisi for <b>Sheldon's Georgian health certificate</b> — and confirm the AZAL pet booking.</p><span class="dtag">wine · paperwork day</span></div></div>
+        <div class="day"><div class="dn"><b>9</b><span>26 Nov · → Baku</span></div><div class="dc"><h3>One hour east, to the Caspian</h3><p>Morning flight Tbilisi–Baku. Into a place inside or beside <b>Icherisheher</b>, and a first evening walking the Boulevard with the Flame Towers coming on above you.</p><span class="dtag">flight · 1 hr</span></div></div>
+        <div class="day base"><div class="dn"><b>10</b><span>27 Nov · Baku</span></div><div class="dc"><h3>The walled city on foot</h3><p>Maiden Tower, the Shirvanshahs' Palace, caravanserai tea and the lanes between. Down to the seafront in the afternoon; funicular up for the view at sunset.</p><span class="dtag">city · dog-friendly</span></div></div>
+        <div class="day"><div class="dn"><b>11</b><span>28 Nov · Gobustan</span></div><div class="dc"><h3>Rock art &amp; mud volcanoes</h3><p>An hour south to the petroglyph reserve, then the rough track out to the mud volcano plateau. Windy, lunar and unlike anything in Georgia.</p><span class="dtag">day trip · strange</span></div></div>
+        <div class="day"><div class="dn"><b>12</b><span>29 Nov · Absheron</span></div><div class="dc"><h3>Fire temples &amp; a burning hillside</h3><p>Ateshgah in the morning, Yanar Dag toward dusk when the flames read properly, and the Heydar Aliyev Center in between.</p><span class="dtag">the land of fire</span></div></div>
+        <div class="day"><div class="dn"><b>13</b><span>30 Nov · Baku</span></div><div class="dc"><h3>Carpets, tea and a hammam</h3><p>The Carpet Museum, a long tea-house afternoon with armudu glasses and jam, and a proper Baku hammam. <em>Or swap today and tomorrow for a Sheki overnight.</em></p><span class="dtag">slow · warm</span></div></div>
+        <div class="day base"><div class="dn"><b>14</b><span>1 Dec · Baku</span></div><div class="dc"><h3>Last day, and the vet</h3><p>Bazaar for saffron and dried fruit, a final walk on the Boulevard. <b>Sheldon's Azerbaijani health certificate today</b>, and a last check that the AQCS re-import NOC is in hand.</p><span class="dtag">rest · paperwork</span></div></div>
+        <div class="day base"><div class="dn"><b>15</b><span>2 Dec · Fly home</span></div><div class="dc"><h3>Depart with Sheldon</h3><p>Last tea by the Caspian, then Heydar Aliyev airport and Turkish home via Istanbul — every original in the folder.</p><span class="dtag">departure</span></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">11</span><h2>Travel gallery — the Azerbaijani half</h2></div>
+      <p class="lead">What week two actually looks like; the Georgian photographs are on the <b>Georgia</b> tab. <b>Click any photo</b> to open it full-screen and swipe through the set.</p>
+      <div class="gal">
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Icherisheher"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_004_8407.jpg/960px-Baku_IcheriSheher_004_8407.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_004_8407.jpg/1920px-Baku_IcheriSheher_004_8407.jpg" alt="Icherisheher" title="Ludvig14 · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Icherisheher</b><p>Inside the walls of the old city.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Old city lanes"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_Fountain_004_2262.jpg/960px-Baku_IcheriSheher_Fountain_004_2262.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_Fountain_004_2262.jpg/1920px-Baku_IcheriSheher_Fountain_004_2262.jpg" alt="Old city lanes" title="Ludvig14 · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Old city lanes</b><p>Courtyards and fountains behind the walls.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Maiden Tower"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Maiden_Tower_in_Baku_2015.jpg/960px-Maiden_Tower_in_Baku_2015.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Maiden_Tower_in_Baku_2015.jpg/1920px-Maiden_Tower_in_Baku_2015.jpg" alt="Maiden Tower" title="AlixSaz · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">2015</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Maiden Tower</b><p>The 12th-century enigma at the heart of the old city.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Flame Towers"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/960px-Flame_towers_from_Baku_boulevard.JPG" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Flame_towers_from_Baku_boulevard.JPG/1920px-Flame_towers_from_Baku_boulevard.JPG" alt="Flame Towers" title="Xoncha · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Flame Towers</b><p>Three glass flames above the bay, lit after dark.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: The Boulevard"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Baku_Boulevard_pier.jpg/960px-Baku_Boulevard_pier.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Baku_Boulevard_pier.jpg/1920px-Baku_Boulevard_pier.jpg" alt="The Boulevard" title="Radosław Botev · CC BY 3.0 pl · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>The Boulevard</b><p>The Caspian seafront promenade — flat and endless.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Heydar Aliyev Center"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Heydar_Aliyev_Cultural_Center_park.jpg/960px-Heydar_Aliyev_Cultural_Center_park.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Heydar_Aliyev_Cultural_Center_park.jpg/1920px-Heydar_Aliyev_Cultural_Center_park.jpg" alt="Heydar Aliyev Center" title="Aykhan Zayedzadeh · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Heydar Aliyev Center</b><p>Zaha Hadid's building with no straight lines.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Gobustan petroglyphs"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Petroglyphs_in_Gobustan_09.jpg/960px-Petroglyphs_in_Gobustan_09.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Petroglyphs_in_Gobustan_09.jpg/1920px-Petroglyphs_in_Gobustan_09.jpg" alt="Gobustan petroglyphs" title="Aleksander Dragnes · CC BY 2.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Gobustan petroglyphs</b><p>Carvings worked into the rock over 40,000 years.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Rock art at Qobustan"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Petroglyphs_of_Qobustan_2.jpg/960px-Petroglyphs_of_Qobustan_2.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Petroglyphs_of_Qobustan_2.jpg/1920px-Petroglyphs_of_Qobustan_2.jpg" alt="Rock art at Qobustan" title="Walter Callens · CC BY 1.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Dancers and boats</b><p>Figures still legible after forty millennia.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Mud volcanoes"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Gobustan_mud_volcanoes_01.jpg/960px-Gobustan_mud_volcanoes_01.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Gobustan_mud_volcanoes_01.jpg/1920px-Gobustan_mud_volcanoes_01.jpg" alt="Mud volcanoes" title="Bernard Gagnon · CC BY 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Mud volcanoes</b><p>Cold grey mud burping out of a lunar plateau.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Ateshgah"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ateshgah_Zoroastrian_Fire_Temple_%28Baku%29.jpg/960px-Ateshgah_Zoroastrian_Fire_Temple_%28Baku%29.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Ateshgah_Zoroastrian_Fire_Temple_%28Baku%29.jpg/1920px-Ateshgah_Zoroastrian_Fire_Temple_%28Baku%29.jpg" alt="Ateshgah" title="Bernard Gagnon · CC BY 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Ateshgah</b><p>The pentagonal fire temple of the Absheron.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Yanar Dag"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg/960px-Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg/1920px-Yanar_Dag%2C_Baku%2C_Azerbaiy%C3%A1n%2C_2016-09-27%2C_DD_03.jpg" alt="Yanar Dag" title="Diego Delso · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="when">Sep 2016</span><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Yanar Dag</b><p>The hillside that has burned for centuries.</p></figcaption></figure>
+        <figure class="shot" tabindex="0" role="button" aria-label="Expand photo: Sheki Khan Palace"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sheki_khan_palace_main_fa%C3%A7ade.jpg/960px-Sheki_khan_palace_main_fa%C3%A7ade.jpg" data-full="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Sheki_khan_palace_main_fa%C3%A7ade.jpg/1920px-Sheki_khan_palace_main_fa%C3%A7ade.jpg" alt="Sheki Khan Palace" title="Sefer azeri · CC BY-SA 4.0 · Wikimedia Commons" loading="lazy" onerror="this.parentNode.style.display='none'"><span class="zoom" aria-hidden="true">&#9711;</span><figcaption class="cap"><b>Sheki Khan Palace</b><p>Shebeke lattice windows built without nails or glue.</p></figcaption></figure>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">12</span><h2>Must-try — the Azerbaijani table</h2></div>
+      <p class="lead">Persian-leaning and herb-heavy, with more vegetarian room than Georgian food once you get into the qutab and dolma. The Georgian dishes are on the <b>Georgia</b> tab.</p>
+      <div class="food">
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Aserbaidschanischen_Safran_Plov_%281%29.jpg/960px-Aserbaidschanischen_Safran_Plov_%281%29.jpg" alt="Plov" onerror="this.style.display='none'"><div class="db"><b>Plov</b><p>The national centrepiece — saffron rice under a crisp <em>qazmaq</em> crust, with dozens of regional versions.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Azerbaijani_national_dish_Qutab_with_herbs.jpg/960px-Azerbaijani_national_dish_Qutab_with_herbs.jpg" alt="Qutab" onerror="this.style.display='none'"><div class="db"><b>Qutab</b><p>Thin folded flatbreads off a griddle — the herb-and-cheese one is the vegetarian hero here.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Azerbaijani_dolma_pepper_tomato.jpg/960px-Azerbaijani_dolma_pepper_tomato.jpg" alt="Dolma" onerror="this.style.display='none'"><div class="db"><b>Dolma</b><p>Peppers, tomatoes and vine leaves stuffed and slow-cooked, served with garlicky yoghurt.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Dushbara_Azerbaijani_cuisine.jpg/960px-Dushbara_Azerbaijani_cuisine.jpg" alt="Dushbara" onerror="this.style.display='none'"><div class="db"><b>Dushbara</b><p>Tiny lamb dumplings in broth, folded small enough to fit several on a spoon. The cold-weather cure.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Tea_in_Azerbaijani_national_Armudu_glass.jpg/960px-Tea_in_Azerbaijani_national_Armudu_glass.jpg" alt="Armudu tea" onerror="this.style.display='none'"><div class="db"><b>Tea in an armudu glass</b><p>Pear-shaped glasses, drunk through a spoonful of jam rather than sugar. A whole afternoon's institution.</p></div></div>
+        <div class="dish"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Baku_IcheriSheher_Fountain_004_2262.jpg/960px-Baku_IcheriSheher_Fountain_004_2262.jpg" alt="Caravanserai courtyard" onerror="this.style.display='none'"><div class="db"><b>Lunch in a caravanserai</b><p>Two old silk-road inns inside the walls now serve lunch in their stone courtyards — touristy, and still worth one long meal.</p></div></div>
+      </div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">13</span><h2>Getting around</h2></div>
+      <p class="lead">Self-drive in Georgia, don't bother in Azerbaijan. Baku traffic is aggressive, parking inside the old city is effectively impossible, and taxis are cheap enough to make the question moot.</p>
+      <div class="card"><div class="pad" style="padding:16px 18px">
+        <h3 style="margin-top:0">The honest verdict</h3>
+        <ul>
+          <li><b>Georgia, days 1–8:</b> a compact self-drive works well for Tbilisi, Mtskheta and Kakheti, with Sheldon riding along. Take a <b>private driver for the Kazbegi day</b> — the Military Road in snow isn't the place to experiment.</li>
+          <li><b>Baku, days 9–15:</b> no rental. Use <b>Bolt</b> or <b>Uber</b> in the city; the metro is clean and cheap but not for dogs. Icherisheher and the Boulevard are entirely walkable, which is most of your week.</li>
+          <li><b>Gobustan and the Absheron:</b> hire a car and driver for the day, roughly <b>$60–100</b>. The mud volcano track needs a high-clearance vehicle and local drivers negotiate it routinely; ordinary taxis will refuse.</li>
+          <li><b>Airport:</b> Heydar Aliyev is about 25 km out — around 30 minutes, and worth pre-booking on the way home with the carrier and paperwork in tow.</li>
+        </ul>
+      </div></div>
+      <div class="tbl-wrap" style="margin-top:14px"><table>
+        <thead><tr><th>Leg</th><th>Typical price</th><th>Best for</th></tr></thead>
+        <tbody>
+          <tr><td class="trail">Georgia compact self-drive, 5–6 days</td><td class="num">$25–45/day</td><td>Tbilisi, Mtskheta, Kakheti with Sheldon aboard</td></tr>
+          <tr><td class="trail">Private driver, Kazbegi day</td><td class="num">$60–90</td><td>The Military Road in snow</td></tr>
+          <tr><td class="trail">Tbilisi → Baku flight ×2 + pet</td><td class="num">$200–300</td><td>The only way across the border</td></tr>
+          <tr><td class="trail">Car + driver, Gobustan / Absheron</td><td class="num">$60–100/day</td><td>Mud volcanoes, fire temples</td></tr>
+          <tr><td class="trail">Baku taxis (Bolt / Uber)</td><td class="num">$2–6/ride</td><td>Everything inside the city</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section><div class="sec-head"><span class="sec-num">14</span><h2>What it costs — 2 people + Sheldon, 15 days</h2></div>
+      <p class="lead">Mid-range estimate in USD (₹ at ~₹88/$). Baku runs noticeably dearer than Tbilisi or Yerevan, and this version carries an extra flight and two more visas.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Item</th><th>Detail</th><th class="num">USD</th></tr></thead>
+        <tbody>
+          <tr class="sub"><td colspan="3">Before you fly — Sheldon paperwork (India / AQCS)</td></tr>
+          <tr><td>Microchip + rabies + parasite &amp; tapeworm</td><td>vet, if not already done</td><td class="num">$45–80</td></tr>
+          <tr><td>Vet health certificate</td><td>accredited vet</td><td class="num">$25–50</td></tr>
+          <tr><td>AQCS export exam + NOC</td><td>Bangalore, ~1 wk ahead</td><td class="num">$25–60</td></tr>
+          <tr><td>Pet relocation agent (optional)</td><td>handles AQCS + airline docs</td><td class="num">$150–350</td></tr>
+          <tr class="sub"><td colspan="3">Getting there</td></tr>
+          <tr><td>Flights ×2, open-jaw</td><td>BLR → TBS · GYD → BLR, Turkish</td><td class="num">$1,000–1,600</td></tr>
+          <tr><td>Sheldon in-cabin, long legs</td><td>Turkish pet fee, ~€100–150/leg</td><td class="num">$250–450</td></tr>
+          <tr><td>Tbilisi → Baku ×2 + Sheldon</td><td>AZAL, 1 hr, incl. ~€50 pet fee</td><td class="num">$200–300</td></tr>
+          <tr><td>ASAN e-visas ×2</td><td>evisa.gov.az, both passports</td><td class="num">$58</td></tr>
+          <tr class="sub"><td colspan="3">On the ground (15 days)</td></tr>
+          <tr><td>Stays ×14 nights</td><td>$45–95/night — Baku dearer than Tbilisi</td><td class="num">$800–1,300</td></tr>
+          <tr><td>Food &amp; wine, 2 pax</td><td>restaurants daily, both countries</td><td class="num">$550–850</td></tr>
+          <tr><td>Georgia car + Kazbegi driver</td><td>compact self-drive + 1 driver day</td><td class="num">$220–370</td></tr>
+          <tr><td>Azerbaijan drivers &amp; day trips</td><td>Gobustan, Absheron, airport</td><td class="num">$200–320</td></tr>
+          <tr><td>Taxis, tastings, entries, museums</td><td>both countries</td><td class="num">$170–300</td></tr>
+          <tr><td>Travel + accident insurance ×2</td><td>Georgia's 2026 rule, 15 days, + pet cover</td><td class="num">$150–260</td></tr>
+          <tr class="sub"><td colspan="3">After you return — Sheldon home (India / AQCS)</td></tr>
+          <tr><td>Georgian vet certificate (for the flight east)</td><td>Tbilisi, day 8</td><td class="num">$25–50</td></tr>
+          <tr><td>Azerbaijani vet certificate (for home)</td><td>Baku, day 14</td><td class="num">$30–60</td></tr>
+          <tr><td>Re-import Advance NOC + exam</td><td>AQCS Bangalore</td><td class="num">$25–60</td></tr>
+          <tr class="total"><td>Estimated total</td><td>two people + Sheldon, 15 days, all-in</td><td class="num">$4,000–6,600</td></tr>
+        </tbody>
+      </table></div>
+      <div class="note"><b>Reading it:</b> roughly <b>₹3.5–5.8 lakh</b> — about <b>$300–400</b> more than the Armenia pairing, which is the extra flight, the pet fee on it, two e-visas and Baku's higher room rates. What you buy with it is five degrees of warmth and a genuinely stranger second week.</div>
+    </section>
+
+    <div class="foot">
+      <p><b>Verify before booking.</b> Pet-import rules (Azerbaijan's State Veterinary Service, Georgia's National Food Agency, India's AQCS and Customs), the land-border closure, visa policy, insurance requirements and airline pet allowances all change and are enforced at official discretion. Confirm current specifics — above all Sheldon's three cabin slots — before committing money. A planning starting point, not official clearance.</p>
+      <p class="credit">Photos: Wikimedia Commons (CC-licensed); photographers &amp; licences are in each image tooltip. For Puneet &amp; Rachel · Sheldon, toy poodle · Bengaluru ⇄ Sakartvelo ⇄ Azərbaycan.</p>
     </div>
   </div>
 
